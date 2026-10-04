@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/04 02:06:01 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/04 23:28:36 by besaipid         ###   ########.fr       */
+/*   Created: 2026/10/04 22:29:10 by besaipid          #+#    #+#             */
+/*   Updated: 2026/10/04 23:40:11 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
 
-int		ft_printf(const char *format, ...);
-void	ft_join(char c, char **line);
-int		ft_isspecifier(char c);
-char	*ft_substr(char *s);
+int		ft_def_width(char *spec)
+{
+	int		len;
 
-int		ft_def_width(char *spec);
-#endif
+	len = 0;
+
+	return (len);
+}
