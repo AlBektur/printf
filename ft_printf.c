@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/05 00:07:12 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/05 05:11:11 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	ft_isspecifier(char c)
 		return (1);
 	if (c == 's')
 		return (2);
-	if (c == 'd')
-		return (3);
 	if (c == 'i' || c == 'd')
 		return (3);
 	if (c == 'x')
@@ -49,13 +47,18 @@ char	ft_def_specifier(char *spec)
 void	ft_process_argv(char *spec, va_list *argv, char **str)
 {
 	int	width;
-	char	c;
+	char	s;
 
 //	width = ft_def_width(spec);
 
-	c = ft_def_specifier(spec);
+	s = ft_def_specifier(spec);
 
-	printf("specifier: %c\n", c);
+	if (s == 'c')
+		ft_process_char(va_arg(*argv, int), str, spec);
+	if (s == 's')
+		ft_process_str(va_arg(*arg, char *), str, spec);
+
+	printf("specifier: %c\n", s);
 }
 
 void	ft_process(char **line, char *fmt, va_list *argv)
@@ -75,18 +78,21 @@ void	ft_process(char **line, char *fmt, va_list *argv)
 
 
 	ft_process_argv(spec, argv, &str);
+	//printf("%s\n", str);
 
-
+	*line = str;
 
 
 }
+
+
 int		ft_printf(const char *format, ...)
 {
 	va_list	argv;
 	int			i;
 	char	*res;
 	int			j;
-
+	char		*temp;
 	va_start(argv, format);
 	i = 0;
 	res = NULL;
@@ -96,6 +102,8 @@ int		ft_printf(const char *format, ...)
 			ft_join(format[i], &res);
 		else
 		{
+			// this part needs to be finished, he result of the ft_process
+			// should be inserted to res correctly
 			ft_process(&res, (char *)&format[i], &argv);
 			j = i + 1;
 			while (!ft_isspecifier(format[j]))
@@ -104,15 +112,15 @@ int		ft_printf(const char *format, ...)
 		}
 		i++;
 	}
-	printf("%s\n" , res);
+	printf("%s" , res);
 	free(res);
 	return (1);
 }
 
 int	main(int argc, char *argv[])
 {
-	ft_printf(argv[1], 123);
-
-	printf(argv[1], 123);
+	ft_printf(argv[1], argv[2][0]);
+	printf("\nupp\n");
+	printf(argv[1], argv[2][0]);
 	return (0);
 }
