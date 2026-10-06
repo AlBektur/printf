@@ -6,30 +6,42 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:09:14 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/06 05:55:27 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/07 00:46:17 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+int	has_precision(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '.')
+			return (1);
+		i++;
+	}
+	return (-1);
+}
+
+
 int	ft_def_precision(char *s)
 {
 	int	i;
-	int	precision;
 
 	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '.')
-			break;
+	while (s[i] && s[i] != '.')
 		i++;
-	}
-	i++;
-	precision = ft_atoi(&s[i]);
-	// printf("%c\n", s[i]);
-	// printf("precision: %d\n", precision);
-	return (precision);
+	if (s[i] != '.')
+		return (-1);      // no precision
+	i++;                  // move after '.'
+	if (!(s[i] >= '0' && s[i] <= '9'))
+		return (0);       // "%.s" -> precision 0
+	return (ft_atoi(&s[i]));
 }
+
 void	ft_process_str(char *str, char **line, char *spec)
 {
 	flags	rules;
@@ -49,30 +61,36 @@ void	ft_process_str(char *str, char **line, char *spec)
 
 
 	// defing if it must be added space before or after argument
-	rules.sp_size = ft_atoi(spec);
-	len = 0;
-	len += rules.sp_size;
 
+
+	rules.sp_size = ft_atoi(spec);
 
 
 	rules.precision = ft_def_precision(spec);
+
+
 // definig size, this should be changed acording to precision.
 
 	str_size = ft_strlen(str);
 
+	if (rules.precision >= 0 && str_size > rules.precision)
+    	str_size = rules.precision;
 
-	if (str_size > rules.precision && rules.precision != 0 || str_size < rules.precision)
-		str_size = rules.precision;
 
 
-	if (rules.precision == 0)
-		len = 0;
-	if (rules.sp_size < str_size)
-		len = str_size;
-	else if (rules.sp_size == 0 && rules.precision > 0)
-		len = rules.precision;
+	// if (rules.sp_size < str_size)
+	// 	len = str_size;
+	// else if (rules.sp_size == 0 && rules.precision > 0)
+	// 	len = rules.precision;
+	// else
+	// 	len = rules.sp_size;
+	if (rules.sp_size > str_size)
+    	len = rules.sp_size;
 	else
-		len = rules.sp_size;
+    	len = str_size;
+
+
+
 
 	// printf("str_size %d\n", str_size);
 	// printf("sp_size %d\n", rules.sp_size);
