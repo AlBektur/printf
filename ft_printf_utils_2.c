@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 22:29:10 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/05 04:33:13 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/06 04:40:00 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_def_width(char *spec)
 static int	ft_isspace(char c)
 {
 	if (c == '-' || c == '%' || (c >= 9 && c <= 13) || c == '#' || c == '+'
-			|| c == ' ')
+			|| c == ' ' || c == '0')
 		return (1);
 	return (0);
 }

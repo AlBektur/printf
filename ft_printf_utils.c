@@ -6,15 +6,15 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:22 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/04 21:54:29 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/06 00:34:10 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -74,7 +74,7 @@ char	*ft_substr(char *s)
 	while (!ft_isspecifier(s[len]))
 		len++;
 
-	res = malloc(sizeof(char) * len);
+	res = malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (NULL);
 
@@ -84,5 +84,6 @@ char	*ft_substr(char *s)
 		res[i] = s[i];
 		i++;
 	}
+	res[i] = '\0';
 	return (res);
 }
