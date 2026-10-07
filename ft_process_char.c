@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:08:04 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/06 00:32:57 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/07 04:17:21 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_defleft(char *spec)
 	while (!(spec[i] >= '0' && spec[i] <= '9') && (!ft_isspecifier(spec[i])))
 	{
 		if (spec[i] == '-')
-			return (i);
+			return (1);
 		i++;
 	}
 	return (-1);

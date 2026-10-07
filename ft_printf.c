@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/07 00:43:11 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/07 03:41:26 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_process_argv(char *spec, va_list *argv, char **str)
 	int	width;
 	char	s;
 
-//	width = ft_def_width(spec);
 
 	s = ft_def_specifier(spec);
 
@@ -57,8 +56,10 @@ void	ft_process_argv(char *spec, va_list *argv, char **str)
 		ft_process_char(va_arg(*argv, int), str, spec);
 	if (s == 's')
 		ft_process_str(va_arg(*argv, char *), str, spec);
+	if (s == 'i' || s == 'd')
+		ft_process_id(va_arg(*argv, int), str, spec);
 
-//	printf("specifier: %c\n", s);
+	printf("specifier: %c\n", s);
 }
 
 void	ft_process(char **line, char *fmt, va_list *argv)
@@ -74,7 +75,7 @@ void	ft_process(char **line, char *fmt, va_list *argv)
 
 
 	spec = ft_substr(fmt);
-//	printf("frm part: %s\n", spec);
+	printf("frm part: %s\n", spec);
 
 
 	ft_process_argv(spec, argv, &str);
@@ -121,9 +122,9 @@ int		ft_printf(const char *format, ...)
 
 int	main(int argc, char *argv[])
 {
-	ft_printf(argv[1], argv[2]);
+	ft_printf(argv[1], atoi(argv[2]));
 	printf("\nupp\n");
-	printf(argv[1], argv[2]);
+	printf(argv[1], atoi(argv[2]));
 	return (0);
 }
 

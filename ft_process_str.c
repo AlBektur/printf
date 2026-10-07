@@ -6,26 +6,11 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:09:14 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/07 00:46:17 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/07 02:36:54 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	has_precision(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '.')
-			return (1);
-		i++;
-	}
-	return (-1);
-}
-
 
 int	ft_def_precision(char *s)
 {

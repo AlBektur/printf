@@ -6,21 +6,11 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 22:29:10 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/06 04:40:00 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/07 02:30:50 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
-int		ft_def_width(char *spec)
-{
-	int		len;
-
-	len = 0;
-
-	return (len);
-}
 
 static int	ft_isspace(char c)
 {
