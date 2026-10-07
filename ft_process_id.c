@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 01:43:44 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/07 04:15:33 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/07 05:10:40 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,27 @@ char	*ft_itoa(int n)
 	return (res);
 }
 
-int	ft_defsign(char *str)
+int	ft_def_left(char *spec)
+{
+	int	i;
+
+	i = 1;
+	while (!(spec[i] >= '0' && spec[i] <= '9') && (!ft_isspecifier(spec[i])))
+	{
+		if (spec[i] == '-')
+			return (1);
+		i++;
+	}
+	return (-1);
+}
+
+int	ft_defsign(char *str, int n)
 {
 	int	i;
 
 	i = 0;
+	if (n < 0)
+		return (1);
 	while (str[i] && !(str[i] > '0' && str[i] <= '9'))
 	{
 		if (str[i] == '+')
@@ -122,10 +138,10 @@ void	ft_process_id(int n, char **line, char *spec)
 
 	nb_size = ft_strlen(nb);
 	rules.sp_size = ft_atoi(spec);
-	rules.sign = ft_defsign(spec);
+	rules.sign = ft_defsign(spec, n);
 	rules.precision = ft_def_precision(spec);
 	rules.zero_pad = ft_defzeropad(spec);
-	rules.left = ft_defleft(spec);
+	rules.left = ft_def_left(spec);
 
 	printf("raw nb: \"%s\"\n\n", nb);
 	printf("sign: %d\n", rules.sign);
