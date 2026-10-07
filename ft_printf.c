@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/07 03:41:26 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/07 16:32:41 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_process_argv(char *spec, va_list *argv, char **str)
 
 
 	s = ft_def_specifier(spec);
+	printf("specifier: %c\n", s);
 
 	if (s == 'c')
 		ft_process_char(va_arg(*argv, int), str, spec);
@@ -59,7 +60,7 @@ void	ft_process_argv(char *spec, va_list *argv, char **str)
 	if (s == 'i' || s == 'd')
 		ft_process_id(va_arg(*argv, int), str, spec);
 
-	printf("specifier: %c\n", s);
+
 }
 
 void	ft_process(char **line, char *fmt, va_list *argv)
@@ -75,7 +76,7 @@ void	ft_process(char **line, char *fmt, va_list *argv)
 
 
 	spec = ft_substr(fmt);
-	printf("frm part: %s\n", spec);
+	printf("\nfrm part: %s\n", spec);
 
 
 	ft_process_argv(spec, argv, &str);

@@ -6,88 +6,20 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 01:43:44 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/07 05:10:40 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/07 17:09:33 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	counter(long n)
-{
-	int	i;
 
-	i = 1;
-	if (n < 0)
-	{
-		n *= -1;
-	}
-	while (n > 9)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
-}
-
-static void	ft_reverse(char *str)
-{
-	size_t		start;
-	size_t		end;
-	size_t		len;
-	char		temp;
-
-	len = ft_strlen(str);
-	len--;
-	end = len;
-	start = 0;
-	while (start <= (len / 2))
-	{
-		temp = str[start];
-		str[start] = str[end];
-		str[end] = temp;
-		end--;
-		start++;
-	}
-}
-
-static void	ft_fill(char *res, long n, int i, long sign)
-{
-	if (n < 0)
-		n *= -1;
-	while (n > 9)
-	{
-		res[i] = n % 10 + '0';
-		n = n / 10;
-		i++;
-	}
-	res[i] = n % 10 + '0';
-	res[++i] = '\0';
-}
-
-char	*ft_itoa(int n)
-{
-	char		*res;
-	int			i;
-	long		sign;
-	long		nb;
-
-	i = 0;
-	nb = (long)n;
-	sign = nb;
-	res = malloc(sizeof(int) * (counter(nb) + 1));
-	if (res == NULL)
-		return (NULL);
-	ft_fill(res, nb, i, sign);
-	ft_reverse(res);
-	return (res);
-}
 
 int	ft_def_left(char *spec)
 {
 	int	i;
 
 	i = 1;
-	while (!(spec[i] >= '0' && spec[i] <= '9') && (!ft_isspecifier(spec[i])))
+	while (!(spec[i] > '0' && spec[i] <= '9') && (!ft_isspecifier(spec[i])))
 	{
 		if (spec[i] == '-')
 			return (1);
@@ -141,7 +73,10 @@ void	ft_process_id(int n, char **line, char *spec)
 	rules.sign = ft_defsign(spec, n);
 	rules.precision = ft_def_precision(spec);
 	rules.zero_pad = ft_defzeropad(spec);
+
 	rules.left = ft_def_left(spec);
+	if (rules.left)
+		rules.zero_pad = -1;
 
 	printf("raw nb: \"%s\"\n\n", nb);
 	printf("sign: %d\n", rules.sign);
@@ -150,6 +85,23 @@ void	ft_process_id(int n, char **line, char *spec)
 	printf("precision: %d\n", rules.precision);
 	printf("zeropad: %d\n", rules.zero_pad);
 	printf("nb size: %d\n", nb_size);
+
+
+	// first i have to make a line according to precision, if nb_size < rules.precision, shoud be added 00.
+	// else, nb stays as it was.
+
+	if (rules.precision != -1 && rules.precision > nb_size)
+		ft_make_precision(&nb, rules.precision);
+	printf("after correcting by precision: %s\n", nb);
+
+	/*everything with thinking if it is aligned or no.*/
+
+
+	// then i have to check the sp_size, if sp_size > nb_size i have to add zeros if rules.zero_pad activated.
+	// else fill it with spaces.
+
+
+	//here i should check if rules.sign activated, if it is the sign should be added.
 
 
 
