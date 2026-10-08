@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/07 17:14:11 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/08 18:08:44 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,28 +83,42 @@ char	*ft_itoa(int n)
 }
 
 
-void	ft_make_precision(char **nb, int precision)
+void	ft_make_precision(char **nb, int precision, int sign, int n)
 {
 	char	*temp;
 	int		nb_len;
 	int			i;
 	int			j;
+	char		c;
 
+	if (precision > ft_strlen(*nb))
+		nb_len = precision;
+	else
+		nb_len = ft_strlen(*nb);
 
-	nb_len = precision;
+	if (sign && n < 0)
+		c = '-';
+	else if (sign && n >= 0)
+		c = '+';
 
+	if (sign)
+		nb_len++;
+
+	printf("nb_len: %d\n",nb_len);
 	// protector need to be added
-	temp = malloc(sizeof(char) * (precision + 1));
+	temp = malloc(sizeof(char) * (nb_len + 1));
 
 	i = 0;
-	while(i < (precision - ft_strlen(*nb)))
+	if (c == '+' || c == '-')
+		temp[i++] = c;
+	while(i < (nb_len - ft_strlen(*nb)))
 	{
 		temp[i] = '0';
 		i++;
 	}
 	j = 0;
 
-	while (i < precision)
+	while (i < nb_len)
 	{
 		temp[i] = (*nb)[j];
 		i++;

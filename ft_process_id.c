@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 01:43:44 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/07 17:09:33 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/08 18:08:43 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_defsign(char *str, int n)
 	i = 0;
 	if (n < 0)
 		return (1);
-	while (str[i] && !(str[i] > '0' && str[i] <= '9'))
+	while (str[i] && !(str[i] > '0' && str[i] <= '9') && str[i] != '.')
 	{
 		if (str[i] == '+')
 			return (1);
@@ -44,18 +44,20 @@ int	ft_defsign(char *str, int n)
 	return (-1);
 }
 
-int	ft_defzeropad(char *str)
+int	ft_defzeropad(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && !(str[i] > '0' && str[i] <= '9'))
+	while (s[i])
 	{
-		if (str[i] == '0')
+		if (s[i] == '.' || (s[i] > '0' && s[i] <= '9'))
+			break ;
+		if (s[i] == '0')
 			return (1);
 		i++;
 	}
-	return (-1);
+	return (0);
 }
 void	ft_process_id(int n, char **line, char *spec)
 {
@@ -70,13 +72,17 @@ void	ft_process_id(int n, char **line, char *spec)
 
 	nb_size = ft_strlen(nb);
 	rules.sp_size = ft_atoi(spec);
-	rules.sign = ft_defsign(spec, n);
-	rules.precision = ft_def_precision(spec);
-	rules.zero_pad = ft_defzeropad(spec);
 
+	rules.sign = ft_defsign(spec, n);
+
+	rules.precision = ft_def_precision(spec);
+
+	rules.zero_pad = ft_defzeropad(spec);
 	rules.left = ft_def_left(spec);
-	if (rules.left)
-		rules.zero_pad = -1;
+
+	if (rules.left == 1 || rules.precision >= 0)
+		rules.zero_pad = 0;
+
 
 	printf("raw nb: \"%s\"\n\n", nb);
 	printf("sign: %d\n", rules.sign);
@@ -90,9 +96,12 @@ void	ft_process_id(int n, char **line, char *spec)
 	// first i have to make a line according to precision, if nb_size < rules.precision, shoud be added 00.
 	// else, nb stays as it was.
 
+	// it adds + - signs if needed.
 	if (rules.precision != -1 && rules.precision > nb_size)
-		ft_make_precision(&nb, rules.precision);
+		ft_make_precision(&nb, rules.precision, rules.sign, n);
 	printf("after correcting by precision: %s\n", nb);
+
+	// make precision needs put sign to number if the format has precision point.
 
 	/*everything with thinking if it is aligned or no.*/
 
@@ -101,6 +110,7 @@ void	ft_process_id(int n, char **line, char *spec)
 	// else fill it with spaces.
 
 
+    ///"%.6d" "42"
 	//here i should check if rules.sign activated, if it is the sign should be added.
 
 
