@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:06:01 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/08 18:08:37 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/09 04:39:45 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-typedef struct
+typedef struct s_flags
 {
 	int	left;
 	int	sp_size;
 	int sign;
 	int	zero_pad;
 	int	precision;
-} flags;
+	int	hash;
+	int	space;
+} t_flags;
 
 int		ft_printf(const char *format, ...);
 void	ft_join(char c, char **line);

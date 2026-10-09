@@ -3,9 +3,9 @@
     "configurations": [
         {
             "name": "C Launch",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
-            "program": "${workspaceRoot}/a.out",
+            "program": "${workspaceRoot}/run",
             "preLaunchTask": "build",
             "internalConsoleOptions": "openOnSessionStart",
             "logging": {

@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/08 18:08:35 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/09 04:47:14 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_process(char **line, char *fmt, va_list *argv)
 
 	spec = ft_substr(fmt);
 	printf("\nfrm part: %s\n", spec);
-
+	// validator needs to be added!!!
 
 	ft_process_argv(spec, argv, &str);
 	// printf("%s", str);

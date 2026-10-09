@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/08 18:08:44 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/08 23:55:56 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	ft_make_precision(char **nb, int precision, int sign, int n)
 	temp = malloc(sizeof(char) * (nb_len + 1));
 
 	i = 0;
-	if (c == '+' || c == '-')
+	if (sign && (c == '+' || c == '-'))
 		temp[i++] = c;
 	while(i < (nb_len - ft_strlen(*nb)))
 	{
