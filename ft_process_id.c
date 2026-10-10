@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 01:43:44 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/09 05:51:00 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/10 14:36:10 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,66 +74,8 @@ int ft_isdigit(char c)
 
 void	ft_process_id(int n, char **line, char *spec)
 {
-	// char	*nb;
-	// flags	rules;
-	// int		nb_size;
-
-
-	// nb = ft_itoa(n);
-
-
-
-	// nb_size = ft_strlen(nb);
-	// rules.sp_size = ft_atoi(spec);
-
-	// rules.sign = ft_defsign(spec, n);
-
-	// rules.precision = ft_def_precision(spec);
-
-	// rules.zero_pad = ft_defzeropad(spec);
-	// rules.left = ft_def_left(spec);
-
-	// if (rules.left == 1 || rules.precision >= 0)
-	// 	rules.zero_pad = 0;
-
-
-	// printf("raw nb: \"%s\"\n\n", nb);
-	// printf("sign: %d\n", rules.sign);
-	// printf("left %d\n", rules.left);
-	// printf("sp_size: %d\n", rules.sp_size);
-	// printf("precision: %d\n", rules.precision);
-	// printf("zeropad: %d\n", rules.zero_pad);
-	// printf("nb size: %d\n", nb_size);
-
-
-	// first i have to make a line according to precision, if nb_size < rules.precision, shoud be added 00.
-	// else, nb stays as it was.
-
-	// it adds + - signs if needed.
-	// if (rules.precision != -1 && rules.precision > nb_size)
-	// 	ft_make_precision(&nb, rules.precision, rules.sign, n);
-	// printf("after correcting by precision: %s\n", nb);
-
-	// make precision needs put sign to number if the format has precision point.
-
-	/*everything with thinking if it is aligned or no.*/
-
-
-	// then i have to check the sp_size, if sp_size > nb_size i have to add zeros if rules.zero_pad activated.
-	// else fill it with spaces.
-
-
-    ///"%.6d" "42"
-	//here i should check if rules.sign activated, if it is the sign should be added.
-
-
-
-	//printf("%s", res);
-
-
-
-
 	t_flags	rules = {-1, -1, -1, -1, -1, -1, -1};
+	*line = ft_itoa(n);
 	int	i;
 
 	i = 1;
@@ -182,12 +124,41 @@ void	ft_process_id(int n, char **line, char *spec)
 		}
 	}
 
+	if (rules.left != -1)
+		rules.zero_pad = -1;
+	if (rules.space != -1 && rules.sign)
+		rules.space = -1;
+	if (rules.sign)
+		rules.space = -1;
+	if (rules.precision != -1)
+		rules.zero_pad = -1;
+	if (n < 0)
+		rules.sign = 1;
+
 
 	printf("sign: %d\n", rules.sign);
 	printf("left %d\n", rules.left);
 	printf("sp_size: %d\n", rules.sp_size);
 	printf("precision: %d\n", rules.precision);
 	printf("zeropad: %d\n", rules.zero_pad);
-//	printf("nb size: %d\n", nb_size);
+	printf("space: %d\n", rules.space);
+
+	printf("\n\nraw n: \"%s\"\n",  *line);
+
+	ft_make_precision(line, rules.precision);
+
+	printf("after precision: \"%s\"\n",  *line);
+
+	// // this always if has recision
+	// if (rules.sign != -1)
+	// 	ft_add_sign(line, n);
+
+
+
+	ft_make_id_line(line, rules, n);
+
+	printf("after make_id_line: \"%s\"\n",  *line);
+
+	printf("sizeof total line to print %d\n", ft_strlen(*line));
 
 }

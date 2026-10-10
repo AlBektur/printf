@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:08:04 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/07 04:17:21 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/10 00:35:40 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_defleft(char *spec)
 
 void	ft_process_char(char c, char **line, char *spec)
 {
-	flags	rules;
+	t_flags	rules;
 	int		len;
 	int		i;
 

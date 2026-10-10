@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/09 04:47:14 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/10 03:11:07 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,25 +98,26 @@ int		ft_printf(const char *format, ...)
 	va_start(argv, format);
 	i = 0;
 	res = NULL;
-	while(format[i])
-	{
-		if (format[i] != '%')
-		{
-			ft_join(format[i], &res);
-			printf("%c", format[i]);
-		}
-		else
-		{
-			// this part needs to be finished, he result of the ft_process
-			// should be inserted to res correctly
-			ft_process(&res, (char *)&format[i], &argv);
-			j = i + 1;
-			while (!ft_isspecifier(format[j]))
-				j++;
-			i = j;
-		}
-		i++;
-	}
+	ft_process(&res, (char *)format, &argv);
+	// while(format[i])
+	// {
+	// 	if (format[i] != '%')
+	// 	{
+	// 		ft_join(format[i], &res);
+	// 		printf("%c", format[i]);
+	// 	}
+	// 	else
+	// 	{
+	// 		// this part needs to be finished, he result of the ft_process
+	// 		// should be inserted to res correctly
+	// 		ft_process(&res, (char *)&format[i], &argv);
+	// 		j = i + 1;
+	// 		while (!ft_isspecifier(format[j]))
+	// 			j++;
+	// 		i = j;
+	// 	}
+	// 	i++;
+	// }
 //	printf("%s" , res);
 	return (1);
 }

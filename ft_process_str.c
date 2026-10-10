@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:09:14 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/08 18:08:39 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/10 00:36:10 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_def_precision(char *s)
 
 void	ft_process_str(char *str, char **line, char *spec)
 {
-	flags	rules;
+	t_flags	rules;
 	int		len;
 	int		i;
 	int		str_size;
