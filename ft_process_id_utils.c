@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/12 19:35:06 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/12 23:10:07 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	ft_make_precision(char **nb, int precision)
 }
 
 //working on this function
-void	ft_add_sign(char **nb, int n, t_flags rules)
+void	ft_add_sign(char **nb, int n, t_flags *rules)
 {
 	int		len;
 	char	c;
@@ -132,7 +132,7 @@ void	ft_add_sign(char **nb, int n, t_flags rules)
 		c = '-';
 	else
 		c = '+';
-	if (rules.space == 1)
+	if (rules->space == 1)
 		c = ' ';
 
 	len = ft_strlen(*nb) + 1;
@@ -165,7 +165,7 @@ void	ft_add_sign(char **nb, int n, t_flags rules)
 	temp = NULL;
 }
 
-void	ft_make_id_line(char **nb, t_flags rules, int n)
+void	ft_make_id_line(char **nb, t_flags *rules, int n)
 {
 	int		i;
 	char	*temp;
@@ -175,24 +175,24 @@ void	ft_make_id_line(char **nb, t_flags rules, int n)
 
 
 
-	if (rules.zero_pad == 1)
+	if (rules->zero_pad == 1)
 		c = '0';
 	else
 		c = ' ';
 
 
-	if (rules.sp_size > (ft_strlen(*nb) + rules.sign))
+	if (rules->sp_size > (ft_strlen(*nb) + rules->sign))
 	{
 		i = 0;
 		j = 0;
 
-		if (rules.sign != -1)
-			rules.sp_size--;
+		if (rules->sign != -1 || rules->space != -1)
+			rules->sp_size--;
 
 		// protector needs to be added
-		temp = malloc(sizeof(char) * (rules.sp_size + 1));
+		temp = malloc(sizeof(char) * (rules->sp_size + 1));
 
-		if(rules.left == 1)
+		if(rules->left == 1)
 		{
 
 			while (i < ft_strlen(*nb))
@@ -200,21 +200,21 @@ void	ft_make_id_line(char **nb, t_flags rules, int n)
 				temp[i] = (*nb)[i];
 				i++;
 			}
-			while (i < rules.sp_size)
+			while (i < rules->sp_size)
 			{
 				temp[i] = ' ';
 				i++;
 			}
 			temp[i] = '\0';
 		}
-		else if (rules.left != 1)
+		else if (rules->left != 1)
 		{
-			while (i < (rules.sp_size - ft_strlen(*nb)))
+			while (i < (rules->sp_size - ft_strlen(*nb)))
 			{
 				temp[i] = c;
 				i++;
 			}
-			while (i < rules.sp_size)
+			while (i < rules->sp_size)
 			{
 				temp[i] = (*nb)[j];
 				j++;
@@ -222,7 +222,7 @@ void	ft_make_id_line(char **nb, t_flags rules, int n)
 			}
 			temp[i] = '\0';
 		}
-		if (rules.sign == 1 || rules.space == 1)
+		if (rules->sign == 1 || rules->space == 1)
 			ft_add_sign(&temp, n, rules);
 		free(*nb);
 		*nb = temp;
@@ -230,7 +230,7 @@ void	ft_make_id_line(char **nb, t_flags rules, int n)
 	}
 	else
 	{
-		if (rules.sign == 1 || rules.space == 1)
+		if (rules->sign == 1 || rules->space == 1)
 			ft_add_sign(nb, n, rules);
 	}
 }

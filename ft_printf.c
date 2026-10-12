@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/10 03:11:07 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/13 00:50:07 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_process_argv(char *spec, va_list *argv, char **str)
 
 
 	s = ft_def_specifier(spec);
-	printf("specifier: %c\n", s);
+	//printf("specifier: %c\n", s);
 
 	if (s == 'c')
 		ft_process_char(va_arg(*argv, int), str, spec);
@@ -76,7 +76,7 @@ void	ft_process(char **line, char *fmt, va_list *argv)
 
 
 	spec = ft_substr(fmt);
-	printf("\nfrm part: %s\n", spec);
+	//printf("\nfrm part: %s\n", spec);
 	// validator needs to be added!!!
 
 	ft_process_argv(spec, argv, &str);
@@ -99,36 +99,17 @@ int		ft_printf(const char *format, ...)
 	i = 0;
 	res = NULL;
 	ft_process(&res, (char *)format, &argv);
-	// while(format[i])
-	// {
-	// 	if (format[i] != '%')
-	// 	{
-	// 		ft_join(format[i], &res);
-	// 		printf("%c", format[i]);
-	// 	}
-	// 	else
-	// 	{
-	// 		// this part needs to be finished, he result of the ft_process
-	// 		// should be inserted to res correctly
-	// 		ft_process(&res, (char *)&format[i], &argv);
-	// 		j = i + 1;
-	// 		while (!ft_isspecifier(format[j]))
-	// 			j++;
-	// 		i = j;
-	// 	}
-	// 	i++;
-	// }
-//	printf("%s" , res);
+
 	return (1);
 }
 
-int	main(int argc, char *argv[])
-{
-	ft_printf(argv[1], atoi(argv[2]));
-	printf("\nupp\n");
-	printf(argv[1], atoi(argv[2]));
-	return (0);
-}
+// int	main(int argc, char *argv[])
+// {
+// 	ft_printf(argv[1], atoi(argv[2]));
+// 	printf("\nupp\n");
+// 	printf(argv[1], atoi(argv[2]));
+// 	return (0);
+// }
 
 // #include <stdio.h>
 
@@ -655,4 +636,180 @@ int	main(int argc, char *argv[])
 // 	return (0);
 // }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <stdio.h>
 
+#include <limits.h>
+
+int ft_printf(const char *format, ...);
+
+void test(const char *format, int n) { int ret1; int ret2;
+
+printf("\n"); printf("FORMAT: [%s]\n", format); printf("INTEGER: [%d]\n", n);
+
+printf("["); ret1 = printf(format, n); printf("]\n");
+ft_printf(format, n);
+printf("\n\n");
+}
+
+int main(void) { /*
+
+========================================
+BASIC %d
+========================================
+
+*/
+
+test("%d", 0); test("%d", 1); test("%d", 42); test("%d", 123); test("%d", 12345); test("%d", -1); test("%d", -42); test("%d", -123); test("%d", -12345);
+
+/*
+
+========================================
+BASIC %i
+========================================
+
+*/
+
+test("%i", 0); test("%i", 1); test("%i", 42); test("%i", 123); test("%i", 12345); test("%i", -1); test("%i", -42); test("%i", -123); test("%i", -12345);
+
+/*
+
+========================================
+INT LIMITS
+========================================
+
+*/
+
+test("%d", INT_MAX); test("%d", INT_MIN); test("%i", INT_MAX); test("%i", INT_MIN);
+
+/*
+
+========================================
+WIDTH
+========================================
+
+*/
+
+test("%1d", 42); test("%2d", 42); test("%3d", 42); test("%4d", 42); test("%5d", 42); test("%10d", 42); test("%20d", 42);
+
+test("%1d", -42); test("%2d", -42); test("%3d", -42); test("%4d", -42); test("%5d", -42); test("%10d", -42);
+
+test("%1i", 12345); test("%3i", 12345); test("%5i", 12345); test("%10i", 12345);
+
+/*
+
+========================================
+LEFT ALIGNMENT -
+========================================
+
+*/
+
+test("%-1d", 42); test("%-2d", 42); test("%-3d", 42); test("%-5d", 42); test("%-10d", 42);
+
+test("%-1d", -42); test("%-3d", -42); test("%-5d", -42); test("%-10d", -42);
+
+test("%-5i", 123); test("%-10i", -123);
+
+/*
+
+========================================
+ZERO PADDING
+========================================
+
+*/
+
+test("%01d", 42); test("%02d", 42); test("%03d", 42); test("%05d", 42); test("%010d", 42);
+
+test("%03d", -42); test("%05d", -42); test("%010d", -42);
+
+test("%05i", 123); test("%05i", -123);
+
+/*
+
+========================================
+PLUS FLAG +
+========================================
+
+*/
+
+test("%+d", 42); test("%+d", 0); test("%+d", -42);
+
+test("%+i", 42); test("%+i", 0); test("%+i", -42);
+
+test("%+5d", 42); test("%+5d", -42); test("%+05d", 42); test("%+05d", -42);
+
+/*
+
+========================================
+SPACE FLAG
+========================================
+
+*/
+
+test("% d", 42); test("% d", 0); test("% d", -42);
+
+test("% i", 42); test("% i", 0); test("% i", -42);
+
+test("% 5d", 42); test("% 5d", -42); test("% 05d", 42);
+
+/*
+
+========================================
+PRECISION
+========================================
+
+*/
+
+test("%.0d", 0); test("%.0d", 42); test("%.0d", -42);
+
+test("%.1d", 0); test("%.1d", 7); test("%.2d", 7); test("%.3d", 7); test("%.5d", 42); test("%.10d", 42);
+
+test("%.1d", -7); test("%.3d", -7); test("%.5d", -42);
+
+test("%.0i", 0); test("%.0i", 42); test("%.3i", 7); test("%.5i", -42);
+
+/*
+
+========================================
+WIDTH + PRECISION
+========================================
+
+*/
+
+test("%5.2d", 42); test("%5.3d", 42); test("%5.5d", 42); test("%10.5d", 42);
+
+test("%5.2d", -42); test("%8.5d", -42);
+
+test("%5.3i", 7); test("%10.5i", -42);
+
+/*
+
+========================================
+PRECISION + ZERO FLAG
+========================================
+
+*/
+
+test("%05.3d", 42); test("%05.5d", 42); test("%08.5d", -42);
+
+/*
+
+The precision overrides the zero flag.
+
+*/
+
+test("%05.3i", 7); test("%08.5i", -42);
+
+/*
+
+========================================
+COMBINED FLAGS
+========================================
+
+*/
+
+test("%-+8d", 42); test("%-+8d", -42); test("%- 8d", 42); test("%-08d", 42); test("%-08d", -42);
+
+test("%+08i", 42); test("%+08i", -42); test("%-+8i", 42);
+
+return (0); }

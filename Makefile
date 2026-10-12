@@ -2,8 +2,8 @@ NAME = run
 
 CC = cc -g
 
-SRCS = ft_printf.c ft_printf_utils.c ft_printf_utils_2.c ft_process_char.c\
-		ft_process_str.c ft_process_id.c ft_process_id_utils.c
+SRCS = ft_printf.c ft_printf_utils.c ft_printf_utils_2.c ft_printf_utils_3.c\
+		ft_process_char.c ft_process_str.c ft_process_id.c ft_process_id_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -22,4 +22,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
