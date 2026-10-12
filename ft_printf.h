@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:06:01 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/10 13:08:00 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/12 16:53:40 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	ft_defleft(char *spec);
 int	ft_strlen(char *s);
 int	ft_def_precision(char *s);
 char	*ft_itoa(int n);
+int ft_isdigit(char c);
 
 void	ft_make_precision(char **nb, int precision);
 void	ft_make_id_line(char **nb, t_flags rules, int n);
-void	ft_add_sign(char **nb, int n);
+void	ft_add_sign(char **nb, int n, t_flags rules);
 
 void	ft_process_char(char c, char **line, char *spec);
 void	ft_process_str(char *str, char **line, char *spec);

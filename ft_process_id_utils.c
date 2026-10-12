@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/10 15:17:11 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/12 19:35:06 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void	ft_make_precision(char **nb, int precision)
 	temp = NULL;
 }
 
-
-void	ft_add_sign(char **nb, int n)
+//working on this function
+void	ft_add_sign(char **nb, int n, t_flags rules)
 {
 	int		len;
 	char	c;
@@ -132,6 +132,8 @@ void	ft_add_sign(char **nb, int n)
 		c = '-';
 	else
 		c = '+';
+	if (rules.space == 1)
+		c = ' ';
 
 	len = ft_strlen(*nb) + 1;
 
@@ -139,9 +141,18 @@ void	ft_add_sign(char **nb, int n)
 	if (!temp)
 		*nb = NULL;
 
-	i = 1;
-	temp[0] = c;
+	i = 0;
 	j = 0;
+	while ((*nb)[i])
+	{
+		if (ft_isdigit((*nb)[i]) == 1 || (*nb)[i] != ' ')
+			break ;
+		temp[i] = (*nb)[i];
+		i++;
+	}
+	j = i;
+	temp[i] = c;
+	i++;
 	while((*nb)[j])
 	{
 		temp[i] = (*nb)[j];
@@ -164,37 +175,24 @@ void	ft_make_id_line(char **nb, t_flags rules, int n)
 
 
 
-	if (rules.zero_pad != -1 && rules.left == -1)
+	if (rules.zero_pad == 1)
 		c = '0';
-	else if (rules.left != -1)
+	else
+		c = ' ';
 
-//"%+10.5d" "-10"
-	if (rules.sp_size != -1 && rules.sp_size > (ft_strlen(*nb) + rules.sign))
+
+	if (rules.sp_size > (ft_strlen(*nb) + rules.sign))
 	{
 		i = 0;
 		j = 0;
-		// protector need to be added
+
+		if (rules.sign != -1)
+			rules.sp_size--;
+
+		// protector needs to be added
 		temp = malloc(sizeof(char) * (rules.sp_size + 1));
 
-		if (rules.left == -1)
-		{
-			if (rules.sign != -1)
-				ft_add_sign(nb, n);
-			printf("after adding sign: \"%s\"\n",  *nb);
-			while (i < (rules.sp_size - ft_strlen(*nb)))
-			{
-				temp[i] = c;
-				i++;
-			}
-			while (i < rules.sp_size)
-			{
-				temp[i] = *nb[j];
-				i++;
-				j++;
-			}
-			temp[i] = '\0';
-		}
-		else
+		if(rules.left == 1)
 		{
 
 			while (i < ft_strlen(*nb))
@@ -204,17 +202,35 @@ void	ft_make_id_line(char **nb, t_flags rules, int n)
 			}
 			while (i < rules.sp_size)
 			{
+				temp[i] = ' ';
+				i++;
+			}
+			temp[i] = '\0';
+		}
+		else if (rules.left != 1)
+		{
+			while (i < (rules.sp_size - ft_strlen(*nb)))
+			{
+				temp[i] = c;
+				i++;
+			}
+			while (i < rules.sp_size)
+			{
 				temp[i] = (*nb)[j];
 				j++;
 				i++;
 			}
 			temp[i] = '\0';
-			if (rules.sign != -1)
-				ft_add_sign(temp, n);
-			printf("after adding signs: \"%s\"\n",  &temp);
 		}
+		if (rules.sign == 1 || rules.space == 1)
+			ft_add_sign(&temp, n, rules);
 		free(*nb);
 		*nb = temp;
 		temp = NULL;
+	}
+	else
+	{
+		if (rules.sign == 1 || rules.space == 1)
+			ft_add_sign(nb, n, rules);
 	}
 }

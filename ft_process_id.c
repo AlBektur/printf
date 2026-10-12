@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 01:43:44 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/10 14:36:10 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/12 19:36:00 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	ft_process_id(int n, char **line, char *spec)
 	// this is precision
 	if (spec[i] == '.')
 	{
+		rules.zero_pad = -1;
 		i++;
 		while (ft_isdigit(spec[i]))
 		{
@@ -126,9 +127,7 @@ void	ft_process_id(int n, char **line, char *spec)
 
 	if (rules.left != -1)
 		rules.zero_pad = -1;
-	if (rules.space != -1 && rules.sign)
-		rules.space = -1;
-	if (rules.sign)
+	if (rules.sign == 1)
 		rules.space = -1;
 	if (rules.precision != -1)
 		rules.zero_pad = -1;
@@ -157,8 +156,8 @@ void	ft_process_id(int n, char **line, char *spec)
 
 	ft_make_id_line(line, rules, n);
 
+	printf("sizeof total line to print %d\n", ft_strlen(*line));
 	printf("after make_id_line: \"%s\"\n",  *line);
 
-	printf("sizeof total line to print %d\n", ft_strlen(*line));
 
 }
