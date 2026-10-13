@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 03:17:23 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/13 04:51:26 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	ft_process_argv(char *spec, va_list *argv, char **str)
 		ft_process_id(va_arg(*argv, int), str, spec);
 	if (s == 'u')
 		ft_process_u(va_arg(*argv, unsigned int), str, spec);
+	if (s == 'x')
+		ft_process_x(va_arg(*argv, unsigned int), 1, str, spec);
 
 
 }
@@ -107,13 +109,13 @@ int		ft_printf(const char *format, ...)
 	return (1);
 }
 
-// int	main(int argc, char *argv[])
-// {
-// 	ft_printf(argv[1], atoi(argv[2]));
-// 	printf("\nupp\n");
-// 	printf(argv[1], atoi(argv[2]));
-// 	return (0);
-// }
+int	main(int argc, char *argv[])
+{
+	ft_printf(argv[1], atoi(argv[2]));
+	printf("\nupp\n");
+	printf(argv[1], atoi(argv[2]));
+	return (0);
+}
 
 // #include <stdio.h>
 

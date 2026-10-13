@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:06:01 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 02:56:16 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/13 04:38:41 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	ft_process_char(char c, char **line, char *spec);
 void	ft_process_str(char *str, char **line, char *spec);
 void	ft_process_id(int n, char **line, char *spec);
 void	ft_process_u(unsigned int n, char **line, char *spec);
+void	ft_process_x(unsigned int nb, int lowercase, char **line, char *spec);
 #endif
