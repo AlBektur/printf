@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/12 23:10:07 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/13 03:06:53 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ void	ft_make_id_line(char **nb, t_flags *rules, int n)
 	char	pad;
 	char	c;
 	int		j;
-
 
 
 	if (rules->zero_pad == 1)

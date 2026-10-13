@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:06:01 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/12 23:08:06 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/13 02:56:16 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <limits.h>
 
 typedef struct
 {
@@ -40,7 +41,9 @@ int	ft_defleft(char *spec);
 int	ft_strlen(char *s);
 int	ft_def_precision(char *s);
 char	*ft_itoa(int n);
+char	*ft_utoa(unsigned int n);
 int ft_isdigit(char c);
+char	*ft_strdup(const char *s);
 
 void	ft_parser(t_flags *rules, char *spec);
 void	ft_make_precision(char **nb, int precision);
@@ -50,4 +53,5 @@ void	ft_add_sign(char **nb, int n, t_flags *rules);
 void	ft_process_char(char c, char **line, char *spec);
 void	ft_process_str(char *str, char **line, char *spec);
 void	ft_process_id(int n, char **line, char *spec);
+void	ft_process_u(unsigned int n, char **line, char *spec);
 #endif

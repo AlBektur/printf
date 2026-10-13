@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 01:43:44 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 00:46:05 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/13 03:11:45 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_process_id(int n, char **line, char *spec)
 	rules->space = -1;
 
 	*line = ft_itoa(n);
+	if ((*line)[0] == '0')
+		*line = ft_strdup("");
 	ft_parser(rules, spec);
 	if (n < 0)
 	{
