@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 03:06:53 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/14 00:25:16 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,8 @@ void	ft_make_id_line(char **nb, t_flags *rules, int n)
 
 		if (rules->sign != -1 || rules->space != -1)
 			rules->sp_size--;
+		if (rules->hash != -1)
+			rules->sp_size -= 2;
 
 		// protector needs to be added
 		temp = malloc(sizeof(char) * (rules->sp_size + 1));
@@ -223,6 +225,8 @@ void	ft_make_id_line(char **nb, t_flags *rules, int n)
 		}
 		if (rules->sign == 1 || rules->space == 1)
 			ft_add_sign(&temp, n, rules);
+		// if (rules->hash != -1)
+	 	// 	ft_add_hash(nb, 0);
 		free(*nb);
 		*nb = temp;
 		temp = NULL;
@@ -231,5 +235,7 @@ void	ft_make_id_line(char **nb, t_flags *rules, int n)
 	{
 		if (rules->sign == 1 || rules->space == 1)
 			ft_add_sign(nb, n, rules);
+		// if (rules->hash != -1)
+	 	// 	ft_add_hash(nb, 0);
 	}
 }

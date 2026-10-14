@@ -1,10 +1,10 @@
-NAME = run
+NAME = libftprintf.a
 
 CC = cc -g
 
 SRCS = ft_printf.c ft_printf_utils.c ft_printf_utils_2.c ft_printf_utils_3.c\
 		ft_process_char.c ft_process_str.c ft_process_id.c ft_process_id_utils.c\
-		ft_process_u.c ft_process_u_utils.c ft_process_x.c
+		ft_process_u.c ft_process_u_utils.c ft_process_x.c ft_process_p.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

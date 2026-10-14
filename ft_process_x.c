@@ -6,13 +6,28 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 03:21:33 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 05:19:19 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/14 00:40:52 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_add_hash(char **nb, int capital)
+static int	alpha(int c)
+{
+	return (((c >= 65 && c <= 90) || (c >= 97 && c <= 122)));
+}
+
+static int	digit(int c)
+{
+	return ((c >= '0' && c <= '9'));
+}
+
+int	ft_isalnum(int c)
+{
+	return ((alpha(c)) || (digit(c)));
+}
+
+void	ft_add_hash(char **nb, int capital, t_flags *rules)
 {
 	int		len;
 	char	c;
@@ -21,12 +36,16 @@ void	ft_add_hash(char **nb, int capital)
 	int		j;
 
 	if (capital)
-		capital = 'X';
+		c = 'x';
 	else
-		capital = 'x';
+		c = 'X';
 
-	len = ft_strlen(*nb) + 2;
+	len = ft_strlen(*nb);
 
+	if (rules->sp_size < len)
+		len += 2;
+	else
+		len = rules->sp_size - 2;
 	temp = malloc(sizeof(char) * (len + 1));
 	if (!temp)
 		*nb = NULL;
@@ -35,14 +54,16 @@ void	ft_add_hash(char **nb, int capital)
 	j = 0;
 	while ((*nb)[i])
 	{
-		if (ft_isdigit((*nb)[i]) == 1 || (*nb)[i] != ' ')
+		if (ft_isalnum((*nb)[i]) == 1 || (*nb)[i] != ' ')
 			break ;
 		temp[i] = (*nb)[i];
 		i++;
 	}
 	j = i;
-	temp[i++] = '0';
-	temp[i++] = c;
+	temp[i] = '0';
+	i++;
+	temp[i] = c;
+	i++;
 	while((*nb)[j])
 	{
 		temp[i] = (*nb)[j];
@@ -55,15 +76,18 @@ void	ft_add_hash(char **nb, int capital)
 	temp = NULL;
 }
 
-static void	ft_filler(char hex[], unsigned int n, char **line, int hash, int capital)
+static void	ft_filler(char hex[], unsigned int n, char **line)
 {
 	int				i;
 	int				j;
 	char			buffer[32];
-	char			temp[8];
+	char			temp[32];
 
-	// if (n == 0)
-	// 	return (ft_putchar('0'));
+	if (n == 0)
+	{
+		*line = ft_strdup("0");
+	 	return ;
+	}
 	i = 0;
 	while (n > 0)
 	{
@@ -78,9 +102,6 @@ static void	ft_filler(char hex[], unsigned int n, char **line, int hash, int cap
 	buffer[j] = '\0';
 	*line = ft_strdup(buffer);
 
-	//this should be finished
-	// if (hash)
-	// 	ft_add_hash(line, capital);
 }
 
 void	ft_process_x(unsigned int nb, int lowercase, char **line, char *spec)
@@ -110,12 +131,15 @@ void	ft_process_x(unsigned int nb, int lowercase, char **line, char *spec)
 
 	cap_chars = "0123456789ABCDEF";
 	low_chars = "0123456789abcdef";
-	if (lowercase)
-		ft_filler(low_chars, nb, line, rules->hash, lowercase);
-	else
-		ft_filler(cap_chars, nb, line, rules->hash, lowercase);
+	if (lowercase == 1)
+		ft_filler(low_chars, nb, line);
+	else if (lowercase == 0)
+		ft_filler(cap_chars, nb, line);
 
 	ft_make_precision(line, rules->precision);
 	ft_make_id_line(line, rules, nb);
-	printf("%s\n", *line);
+
+	if (rules->hash != -1)
+	 	ft_add_hash(line, lowercase, rules);
+	printf("%s", *line);
 }
