@@ -6,11 +6,14 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/14 03:12:19 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/14 04:32:42 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+// if this returns false, spec should be printed
+int	ft_format_validator(char *spec);
 
 int	ft_isspecifier(char c)
 {
@@ -115,13 +118,13 @@ int		ft_printf(const char *format, ...)
 	return (1);
 }
 
-int	main(int argc, char *argv[])
-{
-	ft_printf(argv[1], atoi(argv[2]));
-	printf("\nupp\n");
-	printf(argv[1], atoi(argv[2]));
-	return (0);
-}
+// int	main(int argc, char *argv[])
+// {
+// 	ft_printf(argv[1], argv[2]);
+// 	printf("\nupp\n");
+// 	printf(argv[1], sargv[2]);
+// 	return (0);
+// }
 
 // #include <stdio.h>
 
@@ -1321,3 +1324,488 @@ int	main(int argc, char *argv[])
 
 // 	return (0);
 // }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// void	test_char(const char *format, int c)
+// {
+// 	int	ret1;
+// 	int	ret2;
+
+// 	printf("\nFORMAT:    [%s]\n", format);
+// 	printf("printf:    [");
+// 	ret1 = printf(format, c);
+// 	printf("]\n");
+// 	printf("ft_printf: [");
+// 	ret2 = ft_printf(format, c);
+// 	printf("]\n");
+// 	printf("RET printf:    [%d]\n", ret1);
+// 	printf("RET ft_printf: [%d]\n", ret2);
+// 	printf("----------------------------------------\n");
+// }
+
+// void	test_str(const char *format, char *str)
+// {
+// 	int	ret1;
+// 	int	ret2;
+
+// 	printf("\nFORMAT:    [%s]\n", format);
+// 	printf("printf:    [");
+// 	ret1 = printf(format, str);
+// 	printf("]\n");
+// 	printf("ft_printf: [");
+// 	ret2 = ft_printf(format, str);
+// 	printf("]\n");
+// 	printf("RET printf:    [%d]\n", ret1);
+// 	printf("RET ft_printf: [%d]\n", ret2);
+// 	printf("----------------------------------------\n");
+// }
+
+// void	test_ptr(const char *format, void *ptr)
+// {
+// 	int	ret1;
+// 	int	ret2;
+
+// 	printf("\nFORMAT:    [%s]\n", format);
+// 	printf("printf:    [");
+// 	ret1 = printf(format, ptr);
+// 	printf("]\n");
+// 	printf("ft_printf: [");
+// 	ret2 = ft_printf(format, ptr);
+// 	printf("]\n");
+// 	printf("RET printf:    [%d]\n", ret1);
+// 	printf("RET ft_printf: [%d]\n", ret2);
+// 	printf("----------------------------------------\n");
+// }
+
+// void	test_int(const char *format, int n)
+// {
+// 	int	ret1;
+// 	int	ret2;
+
+// 	printf("\nFORMAT:    [%s]\n", format);
+// 	printf("printf:    [");
+// 	ret1 = printf(format, n);
+// 	printf("]\n");
+// 	printf("ft_printf: [");
+// 	ret2 = ft_printf(format, n);
+// 	printf("]\n");
+// 	printf("RET printf:    [%d]\n", ret1);
+// 	printf("RET ft_printf: [%d]\n", ret2);
+// 	printf("----------------------------------------\n");
+// }
+
+// void	test_uint(const char *format, unsigned int n)
+// {
+// 	int	ret1;
+// 	int	ret2;
+
+// 	printf("\nFORMAT:    [%s]\n", format);
+// 	printf("printf:    [");
+// 	ret1 = printf(format, n);
+// 	printf("]\n");
+// 	printf("ft_printf: [");
+// 	ret2 = ft_printf(format, n);
+// 	printf("]\n");
+// 	printf("RET printf:    [%d]\n", ret1);
+// 	printf("RET ft_printf: [%d]\n", ret2);
+// 	printf("----------------------------------------\n");
+// }
+
+// int	main(void)
+// {
+// 	int				n;
+// 	unsigned int	u;
+// 	char			*str;
+// 	void			*ptr;
+
+// 	n = 42;
+// 	u = 42;
+// 	str = "Hello World";
+// 	ptr = &n;
+
+// 	/*
+// 	 * ========================================
+// 	 * %c - CHARACTER
+// 	 * ========================================
+// 	 */
+// 	test_char("%c", 'A');
+// 	test_char("%c", 'z');
+// 	test_char("%c", '0');
+// 	test_char("%c", 0);
+// 	test_char("%5c", 'A');
+// 	test_char("%10c", 'A');
+// 	test_char("%-5c", 'A');
+// 	test_char("%-10c", 'A');
+
+// 	/*
+// 	 * ========================================
+// 	 * %s - STRING
+// 	 * ========================================
+// 	 */
+// 	test_str("%s", str);
+// 	test_str("%s", "");
+// 	test_str("%s", "42");
+// 	test_str("%s", "Hello World");
+// 	test_str("%10s", str);
+// 	test_str("%20s", str);
+// 	test_str("%-10s", str);
+// 	test_str("%-20s", str);
+// 	test_str("%.0s", str);
+// 	test_str("%.3s", str);
+// 	test_str("%.5s", str);
+// 	test_str("%.20s", str);
+// 	test_str("%10.3s", str);
+// 	test_str("%-10.3s", str);
+// 	test_str("%20.5s", str);
+// 	test_str("%-20.5s", str);
+
+// 	/*
+// 	 * ========================================
+// 	 * %p - POINTER
+// 	 * ========================================
+// 	 */
+// 	test_ptr("%p", ptr);
+// 	test_ptr("%p", NULL);
+// 	test_ptr("%10p", ptr);
+// 	test_ptr("%20p", ptr);
+// 	test_ptr("%-10p", ptr);
+// 	test_ptr("%-20p", ptr);
+// 	test_ptr("%010p", ptr);
+// 	test_ptr("%020p", ptr);
+// 	test_ptr("%-010p", ptr);
+// 	test_ptr("%10p", NULL);
+// 	test_ptr("%-20p", NULL);
+
+// 	/*
+// 	 * ========================================
+// 	 * %d - SIGNED DECIMAL
+// 	 * ========================================
+// 	 */
+// 	test_int("%d", 42);
+// 	test_int("%d", -42);
+// 	test_int("%d", 0);
+// 	test_int("%d", INT_MAX);
+// 	test_int("%d", INT_MIN);
+// 	test_int("%5d", 42);
+// 	test_int("%10d", 42);
+// 	test_int("%-5d", 42);
+// 	test_int("%-10d", 42);
+// 	test_int("%05d", 42);
+// 	test_int("%010d", -42);
+// 	test_int("%+d", 42);
+// 	test_int("%+d", -42);
+// 	test_int("% d", 42);
+// 	test_int("% d", -42);
+// 	test_int("%.0d", 0);
+// 	test_int("%.5d", 42);
+// 	test_int("%.5d", -42);
+// 	test_int("%8.5d", 42);
+// 	test_int("%-8.5d", 42);
+// 	test_int("%08.5d", 42);
+// 	test_int("%+08d", 42);
+// 	test_int("% 08d", 42);
+// 	test_int("%-+10d", 42);
+// 	test_int("%+-10d", -42);
+
+// 	/*
+// 	 * ========================================
+// 	 * %i - SIGNED DECIMAL
+// 	 * ========================================
+// 	 */
+// 	test_int("%i", 42);
+// 	test_int("%i", -42);
+// 	test_int("%i", 0);
+// 	test_int("%i", INT_MAX);
+// 	test_int("%i", INT_MIN);
+// 	test_int("%5i", 42);
+// 	test_int("%10i", -42);
+// 	test_int("%-10i", 42);
+// 	test_int("%05i", 42);
+// 	test_int("%+i", 42);
+// 	test_int("% i", 42);
+// 	test_int("%.0i", 0);
+// 	test_int("%.5i", 42);
+// 	test_int("%8.5i", -42);
+// 	test_int("%-8.5i", 42);
+// 	test_int("%+08i", 42);
+
+// 	/*
+// 	 * ========================================
+// 	 * %u - UNSIGNED DECIMAL
+// 	 * ========================================
+// 	 */
+// 	test_uint("%u", 42);
+// 	test_uint("%u", 0);
+// 	test_uint("%u", UINT_MAX);
+// 	test_uint("%5u", 42);
+// 	test_uint("%10u", 42);
+// 	test_uint("%-5u", 42);
+// 	test_uint("%-10u", 42);
+// 	test_uint("%05u", 42);
+// 	test_uint("%010u", 42);
+// 	test_uint("%.0u", 0);
+// 	test_uint("%.5u", 42);
+// 	test_uint("%8.5u", 42);
+// 	test_uint("%-8.5u", 42);
+// 	test_uint("%08.5u", 42);
+
+// 	/*
+// 	 * ========================================
+// 	 * %x - LOWERCASE HEXADECIMAL
+// 	 * ========================================
+// 	 */
+// 	test_uint("%x", 42);
+// 	test_uint("%x", 0);
+// 	test_uint("%x", 255);
+// 	test_uint("%x", UINT_MAX);
+// 	test_uint("%5x", 42);
+// 	test_uint("%10x", 255);
+// 	test_uint("%-10x", 42);
+// 	test_uint("%05x", 42);
+// 	test_uint("%010x", 255);
+// 	test_uint("%#x", 42);
+// 	test_uint("%#x", 0);
+// 	test_uint("%#10x", 42);
+// 	test_uint("%-#10x", 42);
+// 	test_uint("%.0x", 0);
+// 	test_uint("%.5x", 42);
+// 	test_uint("%8.5x", 42);
+// 	test_uint("%-8.5x", 42);
+// 	test_uint("%#08x", 42);
+
+// 	/*
+// 	 * ========================================
+// 	 * %X - UPPERCASE HEXADECIMAL
+// 	 * ========================================
+// 	 */
+// 	test_uint("%X", 42);
+// 	test_uint("%X", 0);
+// 	test_uint("%X", 255);
+// 	test_uint("%X", UINT_MAX);
+// 	test_uint("%5X", 42);
+// 	test_uint("%10X", 255);
+// 	test_uint("%-10X", 42);
+// 	test_uint("%05X", 42);
+// 	test_uint("%010X", 255);
+// 	test_uint("%#X", 42);
+// 	test_uint("%#X", 0);
+// 	test_uint("%#10X", 42);
+// 	test_uint("%-#10X", 42);
+// 	test_uint("%.0X", 0);
+// 	test_uint("%.5X", 42);
+// 	test_uint("%8.5X", 42);
+// 	test_uint("%-8.5X", 42);
+// 	test_uint("%#08X", 42);
+
+// 	return (0);
+// }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void	test_char(const char *format, int c)
+{
+	int	ret1;
+	int	ret2;
+
+	printf("\nFORMAT:    [%s]\n", format);
+	printf("printf:    [");
+	ret1 = printf(format, c);
+	printf("]\n");
+	printf("ft_printf: [");
+	ret2 = ft_printf(format, c);
+	printf("]\n");
+	printf("RET printf:    [%d]\n", ret1);
+	printf("RET ft_printf: [%d]\n", ret2);
+	printf("----------------------------------------\n");
+}
+
+void	test_str(const char *format, char *str)
+{
+	int	ret1;
+	int	ret2;
+
+	printf("\nFORMAT:    [%s]\n", format);
+	printf("printf:    [");
+	ret1 = printf(format, str);
+	printf("]\n");
+	printf("ft_printf: [");
+	ret2 = ft_printf(format, str);
+	printf("]\n");
+	printf("RET printf:    [%d]\n", ret1);
+	printf("RET ft_printf: [%d]\n", ret2);
+	printf("----------------------------------------\n");
+}
+
+void	test_ptr(const char *format, void *ptr)
+{
+	int	ret1;
+	int	ret2;
+
+	printf("\nFORMAT:    [%s]\n", format);
+	printf("printf:    [");
+	ret1 = printf(format, ptr);
+	printf("]\n");
+	printf("ft_printf: [");
+	ret2 = ft_printf(format, ptr);
+	printf("]\n");
+	printf("RET printf:    [%d]\n", ret1);
+	printf("RET ft_printf: [%d]\n", ret2);
+	printf("----------------------------------------\n");
+}
+
+void	test_int(const char *format, int n)
+{
+	int	ret1;
+	int	ret2;
+
+	printf("\nFORMAT:    [%s]\n", format);
+	printf("printf:    [");
+	ret1 = printf(format, n);
+	printf("]\n");
+	printf("ft_printf: [");
+	ret2 = ft_printf(format, n);
+	printf("]\n");
+	printf("RET printf:    [%d]\n", ret1);
+	printf("RET ft_printf: [%d]\n", ret2);
+	printf("----------------------------------------\n");
+}
+
+void	test_uint(const char *format, unsigned int n)
+{
+	int	ret1;
+	int	ret2;
+
+	printf("\nFORMAT:    [%s]\n", format);
+	printf("printf:    [");
+	ret1 = printf(format, n);
+	printf("]\n");
+	printf("ft_printf: [");
+	ret2 = ft_printf(format, n);
+	printf("]\n");
+	printf("RET printf:    [%d]\n", ret1);
+	printf("RET ft_printf: [%d]\n", ret2);
+	printf("----------------------------------------\n");
+}
+
+int	main(void)
+{
+	int				n;
+	unsigned int	u;
+	char			*str;
+	void			*ptr;
+
+	n = 42;
+	u = 42;
+	str = "Hello World";
+	ptr = &n;
+
+	/*
+	 * ========================================
+	 * %c - PRECISION .0
+	 * ========================================
+	 */
+	test_char("%.0c", 'A');
+	test_char("%.0c", 'z');
+	test_char("%.0c", 0);
+
+	/*
+	 * ========================================
+	 * %s - PRECISION .0
+	 * ========================================
+	 */
+	test_str("%.0s", str);
+	test_str("%.0s", "");
+	test_str("%.0s", "42");
+	test_str("%.0s", "Hello World");
+
+	/*
+	 * ========================================
+	 * %p - PRECISION .0
+	 * ========================================
+	 */
+	test_ptr("%.0p", ptr);
+	test_ptr("%.0p", NULL);
+
+	/*
+	 * ========================================
+	 * %d - PRECISION .0
+	 * ========================================
+	 */
+	test_int("%.0d", 0);
+	test_int("%.0d", 1);
+	test_int("%.0d", 42);
+	test_int("%.0d", -42);
+	test_int("%.0d", 12345);
+
+	/*
+	 * ========================================
+	 * %i - PRECISION .0
+	 * ========================================
+	 */
+	test_int("%.0i", 0);
+	test_int("%.0i", 1);
+	test_int("%.0i", 42);
+	test_int("%.0i", -42);
+	test_int("%.0i", 12345);
+
+	/*
+	 * ========================================
+	 * %u - PRECISION .0
+	 * ========================================
+	 */
+	test_uint("%.0u", 0);
+	test_uint("%.0u", 1);
+	test_uint("%.0u", 42);
+	test_uint("%.0u", 12345);
+
+	/*
+	 * ========================================
+	 * %x - PRECISION .0
+	 * ========================================
+	 */
+	test_uint("%.0x", 0);
+	test_uint("%.0x", 1);
+	test_uint("%.0x", 42);
+	test_uint("%.0x", 255);
+	test_uint("%.0x", 12345);
+
+	/*
+	 * ========================================
+	 * %X - PRECISION .0
+	 * ========================================
+	 */
+	test_uint("%.0X", 0);
+	test_uint("%.0X", 1);
+	test_uint("%.0X", 42);
+	test_uint("%.0X", 255);
+	test_uint("%.0X", 12345);
+
+	/*
+	 * ========================================
+	 * .0 WITH WIDTH
+	 * ========================================
+	 */
+	test_str("%10.0s", str);
+	test_str("%-10.0s", str);
+
+	test_int("%5.0d", 0);
+	test_int("%5.0d", 42);
+	test_int("%-5.0d", 0);
+	test_int("%05.0d", 42);
+
+	test_int("%5.0i", 0);
+	test_int("%-5.0i", 42);
+
+	test_uint("%5.0u", 0);
+	test_uint("%-5.0u", 42);
+
+	test_uint("%5.0x", 0);
+	test_uint("%-5.0x", 42);
+
+	test_uint("%5.0X", 0);
+	test_uint("%-5.0X", 42);
+
+	return (0);
+}

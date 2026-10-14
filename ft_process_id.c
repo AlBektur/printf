@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 01:43:44 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 03:11:45 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/14 04:33:05 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	ft_process_id(int n, char **line, char *spec)
 	// 	return ;
 	ft_make_precision(line, rules->precision);
 	ft_make_id_line(line, rules, n);
-	printf("[%s]",  *line);
+	printf("%s",  *line);
 }

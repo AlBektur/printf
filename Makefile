@@ -1,4 +1,4 @@
-NAME = libftprintf.a
+NAME = precision
 
 CC = cc -g
 
