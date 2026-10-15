@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 22:29:10 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 02:56:26 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/15 17:50:04 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_isspace(char c)
 {
 	if (c == '-' || c == '%' || (c >= 9 && c <= 13) || c == '#' || c == '+'
-			|| c == ' ' || c == '0')
+		|| c == ' ' || c == '0')
 		return (1);
 	return (0);
 }
@@ -31,12 +31,6 @@ int	ft_atoi(char *nptr)
 	i = 0;
 	while (ft_isspace(nptr[i]))
 		i++;
-	// if (nptr[i] == '+' || nptr[i] == '-')
-	// {
-	// 	if (nptr[i] == '-')
-	// 		sign = -1;
-	// 	i++;
-	// }
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		res = res * 10 + (nptr[i] - '0');
