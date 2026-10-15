@@ -6,39 +6,11 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 00:50:54 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/14 03:09:37 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/15 05:40:17 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-// int	processor(char hex_chars[], char buffer[], unsigned long n)
-// {
-// 	int			i;
-// 	int			j;
-// 	int			c;
-
-// 	c = 0;
-// 	i = 0;
-// 	if (n == 0)
-// 		buffer[i++] = '0';
-// 	else
-// 	{
-// 		while (n > 0)
-// 		{
-// 			buffer[i++] = hex_chars[n % 16];
-// 			n /= 16;
-// 		}
-// 	}
-// 	j = i - 1;
-// 	while (j >= 0)
-// 	{
-// 		if (ft_putchar(buffer[j--]) == -1)
-// 			return (-1);
-// 		c++;
-// 	}
-// 	return (c);
-// }
 
 static void	ft_fill(char hex[], unsigned long n, char **line)
 {
@@ -115,6 +87,4 @@ void	ft_process_p(void *ptr, char **line, char *spec)
 
 	if (rules->sign == 0)
 		ft_add_sign(line, 1, rules);
-
-	printf("%s", *line);
 }

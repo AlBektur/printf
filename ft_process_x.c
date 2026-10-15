@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 03:21:33 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/14 00:40:52 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/15 05:41:12 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,4 @@ void	ft_process_x(unsigned int nb, int lowercase, char **line, char *spec)
 
 	if (rules->hash != -1)
 	 	ft_add_hash(line, lowercase, rules);
-	printf("%s", *line);
 }

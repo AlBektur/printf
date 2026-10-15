@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:09:14 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 00:59:56 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/15 05:15:54 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,4 @@ void	ft_process_str(char *str, char **line, char *spec)
 		}
 		(*line)[i] = '\0';
 	}
-	printf("%s", *line);
 }

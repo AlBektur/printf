@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:22 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/06 00:34:10 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/15 01:47:08 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,47 +22,67 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-static void	ft_strcpy(char *dest, char *src)
+void	ft_strjoin(char **line, char *s2, char c)
 {
-	int	i;
+        char            *res;
+        int                     size;
+        int                     i;
+        int                     j;
 
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-}
-
-void	ft_join(char c, char **line)
-{
-	char	*temp;
-	size_t	len;
-
-	if (*line == NULL)
-	{
-		*line = malloc(2);
-		if (!*line)
+		if (s2 != NULL)
 		{
-			line = NULL;
-			return ;
-		}
-		(*line)[0] = c;
-		(*line)[1] = '\0';
-	}
-	else
-	{
-		len = ft_strlen(*line);
-		temp = malloc((sizeof(char) * len) + 2);
+			if (!*line)
+			{
+				*line = ft_strdup(s2);
+				return ;
+			}
+			size = ft_strlen(*line) + ft_strlen(s2);
 
-		ft_strcpy(temp, *line);
-		temp[len] = c;
-		temp[++len] = '\0';
-		free(*line);
-		*line = temp;
-		temp = NULL;
-	}
+			// protector needs to be added
+			res = malloc(sizeof(char) * (size + 1));
+			i = 0;
+			j = 0;
+			while ((*line)[i])
+			{
+					res[i] = (*line)[i];
+					i++;
+			}
+			while (s2[j])
+			{
+					res[i] = s2[j];
+					i++;
+					j++;
+			}
+			res[i] = '\0';
+			*line = res;
+		}
+		else
+		{
+			if (*line)
+				size = ft_strlen(*line) + 1;
+			else
+				size = 1;
+
+			res = (char *)malloc(sizeof(char) * size + 1);
+
+			i = 0;
+			if (*line != NULL)
+			{
+				while((*line)[i])
+				{
+					res[i] = (*line)[i];
+					i++;
+				}
+			}
+			res[i] = c;
+			i++;
+			res[i] = '\0';
+
+			*line = res;
+		}
 }
+
+
 
 char	*ft_substr(char *s)
 {

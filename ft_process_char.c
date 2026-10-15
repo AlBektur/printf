@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:08:04 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/14 04:20:36 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/15 05:16:10 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	ft_process_char(char c, char **line, char *spec)
 		(*line)[i] = c;
 		(*line)[++i] = '\0';
 	}
-	printf("%s", *line);
 }
 
 

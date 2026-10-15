@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:06:01 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/14 01:11:15 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/15 01:24:24 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*ft_itoa(int n);
 char	*ft_utoa(unsigned int n);
 int ft_isdigit(char c);
 char	*ft_strdup(const char *s);
+void	ft_strjoin(char **line, char *s2, char c);
 
 void	ft_parser(t_flags *rules, char *spec);
 void	ft_make_precision(char **nb, int precision);
