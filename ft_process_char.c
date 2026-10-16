@@ -6,45 +6,18 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:08:04 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/15 05:16:10 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/16 02:54:31 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_defleft(char *spec)
+void	ft_make_c_line(t_flags *rules, char **line, char c, int len)
 {
-	int	i;
-
-	i = 1;
-	while (!(spec[i] >= '0' && spec[i] <= '9') && (!ft_isspecifier(spec[i])))
-	{
-		if (spec[i] == '-')
-			return (1);
-		i++;
-	}
-	return (-1);
-}
-
-void	ft_process_char(char c, char **line, char *spec)
-{
-	t_flags	rules;
-	int		len;
 	int		i;
 
-	if (ft_defleft(spec) != -1)
-		rules.left = 1;
-	else
-		rules.left = 0;
-
-	rules.sp_size = ft_atoi(spec);
-	len = 0;
-	len += rules.sp_size;
-
-	*line = (char *)malloc(sizeof(char) * (len + 1)); // needs to be added protector
-
 	i = 0;
-	if (rules.left)
+	if (rules->left != -1)
 	{
 		(*line)[i] = c;
 		i++;
@@ -67,4 +40,25 @@ void	ft_process_char(char c, char **line, char *spec)
 	}
 }
 
+void	ft_process_char(char c, char **line, char *spec)
+{
+	t_flags	*rules;
+	t_flags	node;
+	int		len;
 
+	rules = &node;
+	rules->left = -1;
+	rules->sp_size = -1;
+	rules->precision = -1;
+	ft_parser(rules, spec);
+	rules->sign = -1;
+	rules->zero_pad = -1;
+	rules->hash = -1;
+	rules->space = -1;
+	len = 0;
+	len += rules->sp_size;
+	*line = (char *)malloc(sizeof(char) * (len + 1));
+	if (*line == NULL)
+		return ;
+	ft_make_c_line(rules, line, c, len);
+}

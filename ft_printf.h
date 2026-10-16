@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:06:01 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/15 17:29:54 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/16 02:14:25 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdarg.h>
 # include <limits.h>
 
-typedef struct
+typedef struct s_flags
 {
 	int	left;
 	int	sp_size;

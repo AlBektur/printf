@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/15 17:28:00 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/16 04:13:44 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,8 @@ int	ft_printf(const char *format, ...)
 
 int	main(int argc, char *argv[])
 {
-	ft_printf(argv[1], atoi(argv[2]));
+	ft_printf(argv[1], argv[2]);
 	printf("\nupp\n");
-	printf(argv[1], atoi(argv[2]));
+	printf(argv[1], argv[2]);
 	return (0);
 }

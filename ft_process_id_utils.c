@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/14 00:25:16 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/16 02:36:11 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,8 +225,6 @@ void	ft_make_id_line(char **nb, t_flags *rules, int n)
 		}
 		if (rules->sign == 1 || rules->space == 1)
 			ft_add_sign(&temp, n, rules);
-		// if (rules->hash != -1)
-	 	// 	ft_add_hash(nb, 0);
 		free(*nb);
 		*nb = temp;
 		temp = NULL;
