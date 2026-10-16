@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/16 02:36:11 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/16 06:02:51 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	ft_reverse(char *str)
 		str[end] = temp;
 		end--;
 		start++;
-	}
+	}		// if (rules->hash != -1)
+	 	// 	ft_add_hash(nb, 0);
 }
 
 static void	ft_fill(char *res, long n, int i, long sign)
@@ -95,9 +96,6 @@ void	ft_make_precision(char **nb, int precision)
 		nb_len = precision;
 	else
 		nb_len = ft_strlen(*nb);
-
-	// printf("nb_len: %d\n",nb_len);
-	// protector need to be added
 	temp = malloc(sizeof(char) * (nb_len + 1));
 
 	i = 0;
@@ -233,7 +231,5 @@ void	ft_make_id_line(char **nb, t_flags *rules, int n)
 	{
 		if (rules->sign == 1 || rules->space == 1)
 			ft_add_sign(nb, n, rules);
-		// if (rules->hash != -1)
-	 	// 	ft_add_hash(nb, 0);
 	}
 }

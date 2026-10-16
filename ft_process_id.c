@@ -6,12 +6,11 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 01:43:44 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/15 17:31:12 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/16 05:11:01 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 void	ft_process_id(int n, char **line, char *spec)
 {
@@ -26,7 +25,6 @@ void	ft_process_id(int n, char **line, char *spec)
 	rules->precision = -1;
 	rules->hash = -1;
 	rules->space = -1;
-
 	*line = ft_itoa(n);
 	if ((*line)[0] == '0')
 		*line = ft_strdup("");
@@ -36,9 +34,6 @@ void	ft_process_id(int n, char **line, char *spec)
 		rules->sign = 1;
 		rules->space = -1;
 	}
-
-	// if (rules->precision == -1 && n == 0)
-	// 	return ;
 	ft_make_precision(line, rules->precision);
 	ft_make_id_line(line, rules, n);
 }

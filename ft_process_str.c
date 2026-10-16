@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:09:14 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/16 05:08:57 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/16 06:07:26 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_process_str(char *str, char **line, char *spec)
 	else
 		len = str_size;
 	*line = malloc(sizeof(char) * (len + 1));
-	if (*line)
+	if ((*line) == NULL)
 		return ;
 	if (rules->left != -1)
 		ft_make_str_line(line, str, str_size, len);

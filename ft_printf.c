@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/16 04:13:44 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/16 06:29:06 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,3 +157,99 @@ int	main(int argc, char *argv[])
 	printf(argv[1], argv[2]);
 	return (0);
 }
+
+
+// int	main(void) {
+// printf("\n===== CHARACTERS =====\n");
+// printf("|%c| |%5c| |%-5c| |%05c|\n", 'A', 'A', 'A', 'A');
+// ft_printf("|%c| |%5c| |%-5c| |%05c|\n", 'A', 'A', 'A', 'A');
+// printf("|%c| |%5c| |%-5c|\n", '\0', '\0', '\0');
+// //ft_printf("|%c| |%5c| |%-5c|\n", '\0', '\0', '\0');
+
+// printf("\n===== STRINGS =====\n");
+// printf("|%s| |%10s| |%-10s|\n", "Hello", "Hello", "Hello");
+// ft_printf("|%s| |%10s| |%-10s|\n", "Hello", "Hello", "Hello");
+// printf("|%.0s| |%.3s| |%10.3s| |%-10.3s|\n",
+// 	"Hello", "Hello", "Hello", "Hello");
+// ft_printf("|%.0s| |%.3s| |%10.3s| |%-10.3s|\n",
+// 	"Hello", "Hello", "Hello", "Hello");
+
+// printf("\n===== SIGNED INTEGERS =====\n");
+// printf("|%d| |%i| |%+d| |% d|\n", 42, -42, 42, 42);
+// ft_printf("|%d| |%i| |%+d| |% d|\n", 42, -42, 42, 42);
+// printf("|%05d| |%-5d| |%.5d| |%8.5d|\n", 42, 42, 42, 42);
+// ft_printf("|%05d| |%-5d| |%.5d| |%8.5d|\n", 42, 42, 42, 42);
+// printf("|%+08d| |% 08d| |%-+8d|\n", 42, 42, 42);
+// ft_printf("|%+08d| |% 08d| |%-+8d|\n", 42, 42, 42);
+// printf("|%d| |%d|\n", INT_MIN, INT_MAX);
+// ft_printf("|%d| |%d|\n", INT_MIN, INT_MAX);
+// printf("|%.0d| |%.0d|\n", 0, 42);
+// ft_printf("|%.0d| |%.0d|\n", 0, 42);
+
+// printf("\n===== UNSIGNED INTEGERS =====\n");
+// printf("|%u| |%010u| |%.5u| |%10.5u|\n",
+// 	42u, 42u, 42u, 42u);
+// ft_printf("|%u| |%010u| |%.5u| |%10.5u|\n",
+// 	42u, 42u, 42u, 42u);
+// printf("|%u|\n", UINT_MAX);
+// ft_printf("|%u|\n", UINT_MAX);
+// printf("|%.0u|\n", 0u);
+// ft_printf("|%.0u|\n", 0u);
+
+// printf("\n===== HEXADECIMAL =====\n");
+// printf("|%x| |%X| |%#x| |%#X|\n", 255, 255, 255, 255);
+// ft_printf("|%x| |%X| |%#x| |%#X|\n", 255, 255, 255, 255);
+// printf("|%08x| |%.5x| |%8.5x|\n", 255, 255, 255);
+// ft_printf("|%08x| |%.5x| |%8.5x|\n", 255, 255, 255);
+// printf("|%#08x| |%#8x| |%#.5x|\n", 255, 255, 255);
+// ft_printf("|%#08x| |%#8x| |%#.5x|\n", 255, 255, 255);
+// printf("|%#x| |%#.0x|\n", 0, 0);
+// ft_printf("|%#x| |%#.0x|\n", 0, 0);
+
+// printf("\n===== POINTERS =====\n");
+// int	n = 42;
+// printf("|%p| |%p|\n", (void *)&n, (void *)0);
+// ft_printf("|%p| |%p|\n", (void *)&n, (void *)0);
+// printf("|%20p| |%-20p|\n", (void *)&n, (void *)&n);
+// ft_printf("|%20p| |%-20p|\n", (void *)&n, (void *)&n);
+
+// printf("\n===== PERCENT SIGN =====\n");
+// printf("100%% complete\n");
+// ft_printf("100%% complete\n");
+// printf("%% %% %%\n");
+// ft_printf("%% %% %%\n");
+
+// printf("\n===== MIXED CONVERSIONS =====\n");
+// printf("|%c| |%s| |%p| |%d| |%i| |%u| |%x| |%X| |%%|\n",
+// 	'A', "Hello", (void *)&n, -42, 42, 42u, 255, 255);
+// ft_printf("|%c| |%s| |%p| |%d| |%i| |%u| |%x| |%X| |%%|\n",
+// 	'A', "Hello", (void *)&n, -42, 42, 42u, 255, 255);
+
+// printf("\n===== EDGE CASES =====\n");
+// printf("|%d| |%u| |%x| |%X|\n", 0, 0u, 0, 0);
+// ft_printf("|%d| |%u| |%x| |%X|\n", 0, 0u, 0, 0);
+// printf("|%2d| |%2s|\n", 12345, "Hello");
+// ft_printf("|%2d| |%2s|\n", 12345, "Hello");
+// printf("|%015d| |%015d| |%015u|\n", INT_MIN, INT_MAX, UINT_MAX);
+// ft_printf("|%015d| |%015d| |%015u|\n", INT_MIN, INT_MAX, UINT_MAX);
+
+// printf("\n===== FINAL VISUAL TEST =====\n");
+// printf("|%5c| |%-5c| |%05d| |%-8d| |%+08d|\n",
+// 	'A', 'B', 42, -42, 42);
+// ft_printf("|%5c| |%-5c| |%05d| |%-8d| |%+08d|\n",
+// 	'A', 'B', 42, -42, 42);
+
+// printf("|%10s| |%-10s| |%.3s| |%10.3s|\n",
+// 	"Hello", "World", "Hello", "Hello");
+// ft_printf("|%10s| |%-10s| |%.3s| |%10.3s|\n",
+// 	"Hello", "World", "Hello", "Hello");
+
+// printf("|%#x| |%#08x| |%.5x| |%8.5x|\n",
+// 	255, 255, 255, 255);
+// ft_printf("|%#x| |%#08x| |%.5x| |%8.5x|\n",
+// 	255, 255, 255, 255);
+
+// printf("\n===== END =====\n");
+// return (0);
+
+// }
