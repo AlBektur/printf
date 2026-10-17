@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 01:06:26 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/13 03:11:58 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 04:49:40 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,9 @@ void	ft_process_u(unsigned int n, char **line, char *spec)
 	rules = &node;
 	rules->left = -1;
 	rules->sp_size = -1;
-	rules->sign = -1;
 	rules->zero_pad = -1;
 	rules->precision = -1;
 	rules->hash = -1;
-	rules->space = -1;
-
 	*line = ft_utoa(n);
 	if ((*line)[0] == '0')
 		*line = ft_strdup("");
@@ -37,10 +34,6 @@ void	ft_process_u(unsigned int n, char **line, char *spec)
 		rules->sign = 1;
 		rules->space = -1;
 	}
-
-	// if (rules->precision == -1 && n == 0)
-	// 	return ;
 	ft_make_precision(line, rules->precision);
 	ft_make_id_line(line, rules, n);
-	printf("%s",  *line);
 }

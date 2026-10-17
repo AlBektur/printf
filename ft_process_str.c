@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:09:14 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/16 06:07:26 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 03:37:08 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_make_str_line(char **line, char *str, int str_size, int len)
 	(*line)[i] = '\0';
 }
 
-void	ft_def_rules(t_flags *rules)
+static void	ft_def_rules(t_flags *rules)
 {
 	rules->left = -1;
 	rules->sp_size = -1;

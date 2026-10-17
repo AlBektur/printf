@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 00:50:54 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/15 05:40:17 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 03:51:44 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_fill(char hex[], unsigned long n, char **line)
 	if (n == 0)
 	{
 		*line = ft_strdup("0");
-	 	return ;
+		return ;
 	}
 	i = 0;
 	while (n > 0)
@@ -37,28 +37,10 @@ static void	ft_fill(char hex[], unsigned long n, char **line)
 	}
 	buffer[j] = '\0';
 	*line = ft_strdup(buffer);
-
 }
 
-
-void	ft_process_p(void *ptr, char **line, char *spec)
+static void	ft_def_rules(t_flags *rules)
 {
-	int					counter;
-	unsigned long		n;
-	char				buffer[32];
-	int					res;
-	char				*hex;
-
-	if (ptr == NULL)
-		*line = ft_strdup("(nil)");
-	n = (unsigned long)ptr;
-	hex = "0123456789abcdef";
-
-
-	t_flags	*rules;
-	t_flags	node;
-
-	rules = &node;
 	rules->left = -1;
 	rules->sp_size = -1;
 	rules->sign = -1;
@@ -66,16 +48,20 @@ void	ft_process_p(void *ptr, char **line, char *spec)
 	rules->precision = -1;
 	rules->hash = -1;
 	rules->space = -1;
+}
 
-	ft_parser(rules, spec);
+void	ft_process_p_1(void *ptr, char **line, t_flags *rules)
+{
+	char			*hex;
+	unsigned long	n;
 
-	rules->hash = 1;
+	hex = "0123456789abcdef";
+	n = (unsigned long)ptr;
 	if (ptr == NULL)
 	{
 		rules->hash = -1;
 		rules->zero_pad = -1;
 	}
-
 	if (rules->sign != -1)
 		rules->sign = 0;
 	if (ptr != NULL)
@@ -84,7 +70,22 @@ void	ft_process_p(void *ptr, char **line, char *spec)
 	ft_make_id_line(line, rules, n);
 	if (ptr != NULL)
 		ft_add_hash(line, 1, rules);
+}
 
+void	ft_process_p(void *ptr, char **line, char *spec)
+{
+	char				buffer[32];
+	int					res;
+	t_flags				*rules;
+	t_flags				node;
+
+	if (ptr == NULL)
+		*line = ft_strdup("(nil)");
+	rules = &node;
+	ft_def_rules(rules);
+	ft_parser(rules, spec);
+	rules->hash = 1;
+	ft_process_p_1(ptr, line, rules);
 	if (rules->sign == 0)
 		ft_add_sign(line, 1, rules);
 }

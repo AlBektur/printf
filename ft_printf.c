@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/17 01:14:35 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 04:41:09 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ int	main(int argc, char *argv[])
 	printf(argv[1], atoi(argv[2]));
 	return (0);
 }
-
 
 // int	main(void) {
 // printf("\n===== CHARACTERS =====\n");
