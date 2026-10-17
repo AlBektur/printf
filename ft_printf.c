@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:46 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/17 04:41:09 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 06:08:41 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,7 @@ void	ft_loop_2(char *format, va_list *argv, char **res, int *i)
 char	*ft_loop(char *format, va_list *argv)
 {
 	int		i;
-	int		j;
 	char	*res;
-	char	*temp;
 
 	res = NULL;
 	i = 0;
@@ -138,6 +136,23 @@ char	*ft_loop(char *format, va_list *argv)
 	return (res);
 }
 
+int	ft_putstr(char *res)
+{
+	int	i;
+
+	i = 0;
+	if (!res)
+		return (0);
+	while (res[i])
+	{
+		if (write(1, &res[i], 1))
+			i++;
+		else
+			return (-1);
+	}
+	return (i);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list		argv;
@@ -145,110 +160,238 @@ int	ft_printf(const char *format, ...)
 
 	va_start(argv, format);
 	res = ft_loop((char *)format, &argv);
-	printf("%s", res);
+	//printf("%s", res);
 	va_end(argv);
-	return (1);
+	return (ft_putstr(res));
 }
 
-int	main(int argc, char *argv[])
-{
-	ft_printf(argv[1], atoi(argv[2]));
-	printf("\nupp\n");
-	printf(argv[1], atoi(argv[2]));
-	return (0);
-}
+// int	main(int argc, char *argv[])
+// {
+// 	ft_printf(argv[1], atoi(argv[2]));
+// 	printf("\nupp\n");
+// 	printf(argv[1], atoi(argv[2]));
+// 	return (0);
+// }
 
-// int	main(void) {
-// printf("\n===== CHARACTERS =====\n");
-// printf("|%c| |%5c| |%-5c| |%05c|\n", 'A', 'A', 'A', 'A');
-// ft_printf("|%c| |%5c| |%-5c| |%05c|\n", 'A', 'A', 'A', 'A');
-// printf("|%c| |%5c| |%-5c|\n", '\0', '\0', '\0');
-// //ft_printf("|%c| |%5c| |%-5c|\n", '\0', '\0', '\0');
 
-// printf("\n===== STRINGS =====\n");
-// printf("|%s| |%10s| |%-10s|\n", "Hello", "Hello", "Hello");
-// ft_printf("|%s| |%10s| |%-10s|\n", "Hello", "Hello", "Hello");
-// printf("|%.0s| |%.3s| |%10.3s| |%-10.3s|\n",
-// 	"Hello", "Hello", "Hello", "Hello");
-// ft_printf("|%.0s| |%.3s| |%10.3s| |%-10.3s|\n",
-// 	"Hello", "Hello", "Hello", "Hello");
 
-// printf("\n===== SIGNED INTEGERS =====\n");
-// printf("|%d| |%i| |%+d| |% d|\n", 42, -42, 42, 42);
-// ft_printf("|%d| |%i| |%+d| |% d|\n", 42, -42, 42, 42);
-// printf("|%05d| |%-5d| |%.5d| |%8.5d|\n", 42, 42, 42, 42);
-// ft_printf("|%05d| |%-5d| |%.5d| |%8.5d|\n", 42, 42, 42, 42);
-// printf("|%+08d| |% 08d| |%-+8d|\n", 42, 42, 42);
-// ft_printf("|%+08d| |% 08d| |%-+8d|\n", 42, 42, 42);
-// printf("|%d| |%d|\n", INT_MIN, INT_MAX);
-// ft_printf("|%d| |%d|\n", INT_MIN, INT_MAX);
-// printf("|%.0d| |%.0d|\n", 0, 42);
-// ft_printf("|%.0d| |%.0d|\n", 0, 42);
 
-// printf("\n===== UNSIGNED INTEGERS =====\n");
-// printf("|%u| |%010u| |%.5u| |%10.5u|\n",
-// 	42u, 42u, 42u, 42u);
-// ft_printf("|%u| |%010u| |%.5u| |%10.5u|\n",
-// 	42u, 42u, 42u, 42u);
-// printf("|%u|\n", UINT_MAX);
-// ft_printf("|%u|\n", UINT_MAX);
-// printf("|%.0u|\n", 0u);
-// ft_printf("|%.0u|\n", 0u);
+// #define TEST(name, ...) do { \
+//     int real_ret; \
+//     int ft_ret; \
+//     printf("\n--- %s ---\n", name); \
+//     printf("printf:    "); \
+//     real_ret = printf(__VA_ARGS__); \
+//     printf("\nReturn: %d\n", real_ret); \
+//     printf("ft_printf: "); \
+//     ft_ret = ft_printf(__VA_ARGS__); \
+//     printf("\nReturn: %d\n", ft_ret); \
+//     printf("Match: %s\n", real_ret == ft_ret ? "OK" : "KO"); \
+// } while (0)
 
-// printf("\n===== HEXADECIMAL =====\n");
-// printf("|%x| |%X| |%#x| |%#X|\n", 255, 255, 255, 255);
-// ft_printf("|%x| |%X| |%#x| |%#X|\n", 255, 255, 255, 255);
-// printf("|%08x| |%.5x| |%8.5x|\n", 255, 255, 255);
-// ft_printf("|%08x| |%.5x| |%8.5x|\n", 255, 255, 255);
-// printf("|%#08x| |%#8x| |%#.5x|\n", 255, 255, 255);
-// ft_printf("|%#08x| |%#8x| |%#.5x|\n", 255, 255, 255);
-// printf("|%#x| |%#.0x|\n", 0, 0);
-// ft_printf("|%#x| |%#.0x|\n", 0, 0);
+// int main(void)
+// {
+//     char *str = "Hello, 42!";
+//     char *null_str = NULL;
+//     int n = 42;
+//     int *ptr = &n;
 
-// printf("\n===== POINTERS =====\n");
-// int	n = 42;
-// printf("|%p| |%p|\n", (void *)&n, (void *)0);
-// ft_printf("|%p| |%p|\n", (void *)&n, (void *)0);
-// printf("|%20p| |%-20p|\n", (void *)&n, (void *)&n);
-// ft_printf("|%20p| |%-20p|\n", (void *)&n, (void *)&n);
+//     /* 1. Basic conversions */
+//     TEST("Character", "Char: %c", 'A');
+//     TEST("String", "String: %s", str);
+//     TEST("Integer", "Integer: %d", 42);
+//     TEST("Integer i", "Integer: %i", -42);
+//     TEST("Unsigned", "Unsigned: %u", 4294967295u);
+//     TEST("Hex lowercase", "Hex: %x", 255);
+//     TEST("Hex uppercase", "Hex: %X", 255);
+//     TEST("Pointer", "Pointer: %p", (void *)ptr);
+//     TEST("Percent", "Percent: %%");
 
-// printf("\n===== PERCENT SIGN =====\n");
-// printf("100%% complete\n");
-// ft_printf("100%% complete\n");
-// printf("%% %% %%\n");
-// ft_printf("%% %% %%\n");
+//     /* 2. Multiple conversions */
+//     TEST("Mixed",
+//         "c=%c s=%s d=%d i=%i u=%u x=%x X=%X %%\n",
+//         'Z', "42", -123, 456, 789u, 255u, 255u);
 
-// printf("\n===== MIXED CONVERSIONS =====\n");
-// printf("|%c| |%s| |%p| |%d| |%i| |%u| |%x| |%X| |%%|\n",
-// 	'A', "Hello", (void *)&n, -42, 42, 42u, 255, 255);
-// ft_printf("|%c| |%s| |%p| |%d| |%i| |%u| |%x| |%X| |%%|\n",
-// 	'A', "Hello", (void *)&n, -42, 42, 42u, 255, 255);
+//     /* 3. Integer boundaries */
+//     TEST("INT_MAX", "%d", INT_MAX);
+//     TEST("INT_MIN", "%d", INT_MIN);
+//     TEST("Zero", "%d", 0);
+//     TEST("Unsigned zero", "%u", 0u);
+//     TEST("Unsigned max", "%u", UINT_MAX);
+//     TEST("Hex zero", "%x", 0);
+//     TEST("Hex max", "%x", UINT_MAX);
 
-// printf("\n===== EDGE CASES =====\n");
-// printf("|%d| |%u| |%x| |%X|\n", 0, 0u, 0, 0);
-// ft_printf("|%d| |%u| |%x| |%X|\n", 0, 0u, 0, 0);
-// printf("|%2d| |%2s|\n", 12345, "Hello");
-// ft_printf("|%2d| |%2s|\n", 12345, "Hello");
-// printf("|%015d| |%015d| |%015u|\n", INT_MIN, INT_MAX, UINT_MAX);
-// ft_printf("|%015d| |%015d| |%015u|\n", INT_MIN, INT_MAX, UINT_MAX);
+//     /* 4. NULL values */
+//     TEST("NULL string", "%s", null_str);
+//     TEST("NULL pointer", "%p", (void *)NULL);
 
-// printf("\n===== FINAL VISUAL TEST =====\n");
-// printf("|%5c| |%-5c| |%05d| |%-8d| |%+08d|\n",
-// 	'A', 'B', 42, -42, 42);
-// ft_printf("|%5c| |%-5c| |%05d| |%-8d| |%+08d|\n",
-// 	'A', 'B', 42, -42, 42);
+//     /* 5. Different formats */
+//     TEST("Empty string", "%s", "");
+//     TEST("Only percent", "%%");
+//     TEST("Several percents", "%%%%%%");
+//     TEST("Adjacent conversions", "%d%d%d", 1, 2, 3);
+//     TEST("No conversions", "Hello, world!");
 
-// printf("|%10s| |%-10s| |%.3s| |%10.3s|\n",
-// 	"Hello", "World", "Hello", "Hello");
-// ft_printf("|%10s| |%-10s| |%.3s| |%10.3s|\n",
-// 	"Hello", "World", "Hello", "Hello");
+//     /* 6. Return value with no output */
+//     TEST("Empty format", "");
 
-// printf("|%#x| |%#08x| |%.5x| |%8.5x|\n",
-// 	255, 255, 255, 255);
-// ft_printf("|%#x| |%#08x| |%.5x| |%8.5x|\n",
-// 	255, 255, 255, 255);
+//     return 0;
+// }
 
-// printf("\n===== END =====\n");
-// return (0);
 
+
+// #include <stdio.h>
+// #include <limits.h>
+// #include <stdint.h>
+// #include "ft_printf.h"
+
+// #define TEST(name, ...) do { \
+//     int real_ret; \
+//     int ft_ret; \
+//     printf("\n\n========== %s ==========\n", name); \
+//     printf("printf:    "); \
+//     fflush(stdout); \
+//     real_ret = printf(__VA_ARGS__); \
+//     printf("\nReturn: %d\n", real_ret); \
+//     printf("ft_printf: "); \
+//     fflush(stdout); \
+//     ft_ret = ft_printf(__VA_ARGS__); \
+//     printf("\nReturn: %d\n", ft_ret); \
+//     printf("Return value: %s\n", \
+//         real_ret == ft_ret ? "OK" : "KO"); \
+// } while (0)
+
+// int main(void)
+// {
+//     char *str = "42 School";
+//     char *empty = "";
+//     char *null_str = NULL;
+//     int n = 42;
+//     int *ptr = &n;
+
+//     /* =========================================
+//        1. MANDATORY CONVERSIONS
+//        ========================================= */
+//     TEST("Character", "%c", 'A');
+//     TEST("String", "%s", str);
+//     TEST("Empty string", "%s", empty);
+//     TEST("NULL string", "%s", null_str);
+//     TEST("Pointer", "%p", (void *)ptr);
+//     TEST("NULL pointer", "%p", (void *)NULL);
+//     TEST("Decimal", "%d", -42);
+//     TEST("Integer", "%i", 42);
+//     TEST("Unsigned", "%u", UINT_MAX);
+//     TEST("Hex lowercase", "%x", 255);
+//     TEST("Hex uppercase", "%X", 255);
+//     TEST("Percent", "%%");
+
+//     /* =========================================
+//        2. INTEGER EDGE CASES
+//        ========================================= */
+//     TEST("INT_MAX", "%d", INT_MAX);
+//     TEST("INT_MIN", "%d", INT_MIN);
+//     TEST("Zero decimal", "%d", 0);
+//     TEST("Zero unsigned", "%u", 0u);
+//     TEST("UINT_MAX", "%u", UINT_MAX);
+//     TEST("Hex zero", "%x", 0);
+//     TEST("Hex max", "%x", UINT_MAX);
+
+//     /* =========================================
+//        3. WIDTH
+//        ========================================= */
+//     TEST("Width decimal", "%10d", 42);
+//     TEST("Width string", "%10s", "hello");
+//     TEST("Width char", "%5c", 'A');
+//     TEST("Width hex", "%8x", 255);
+//     TEST("Width pointer", "%20p", (void *)ptr);
+//     TEST("Width percent", "%5%", 0);
+
+//     /* =========================================
+//        4. LEFT ALIGNMENT (-)
+//        ========================================= */
+//     TEST("Left decimal", "%-10d", 42);
+//     TEST("Left string", "%-10s", "hello");
+//     TEST("Left char", "%-5c", 'A');
+//     TEST("Left hex", "%-8x", 255);
+//     TEST("Left zero", "%-5d", 0);
+
+//     /* =========================================
+//        5. ZERO PADDING (0)
+//        ========================================= */
+//     TEST("Zero padding", "%010d", 42);
+//     TEST("Zero negative", "%010d", -42);
+//     TEST("Zero hex", "%08x", 255);
+//     TEST("Zero unsigned", "%010u", 42u);
+
+//     /* =========================================
+//        6. PRECISION (.)
+//        ========================================= */
+//     TEST("Precision decimal", "%.5d", 42);
+//     TEST("Precision zero", "%.0d", 0);
+//     TEST("Precision integer", "%.5i", -42);
+//     TEST("Precision unsigned", "%.8u", 42u);
+//     TEST("Precision hex", "%.6x", 255);
+//     TEST("Precision string", "%.3s", "42 School");
+//     TEST("Precision empty", "%.0s", "hello");
+//     TEST("Precision empty string", "%.5s", "");
+
+//     /* =========================================
+//        7. WIDTH + PRECISION
+//        ========================================= */
+//     TEST("Width + precision", "%8.5d", 42);
+//     TEST("Width + precision zero", "%8.5d", 0);
+//     TEST("Width + precision negative", "%8.5d", -42);
+//     TEST("String width precision", "%10.3s", "42 School");
+//     TEST("Left width precision", "%-10.3s", "42 School");
+//     TEST("Hex width precision", "%8.4x", 255);
+//     TEST("Unsigned width precision", "%10.6u", 42u);
+
+//     /* =========================================
+//        8. ALTERNATE FORM (#)
+//        ========================================= */
+//     TEST("Alternate hex", "%#x", 255);
+//     TEST("Alternate HEX", "%#X", 255);
+//     TEST("Alternate hex zero", "%#x", 0);
+//     TEST("Alternate HEX zero", "%#X", 0);
+//     TEST("Alternate width", "%#10x", 255);
+//     TEST("Alternate precision", "%#.8x", 255);
+
+//     /* =========================================
+//        9. SIGN FLAGS (+ AND SPACE)
+//        ========================================= */
+//     TEST("Plus positive", "%+d", 42);
+//     TEST("Plus negative", "%+d", -42);
+//     TEST("Plus zero", "%+d", 0);
+//     TEST("Space positive", "% d", 42);
+//     TEST("Space negative", "% d", -42);
+//     TEST("Space zero", "% d", 0);
+//     TEST("Plus width", "%+10d", 42);
+//     TEST("Space width", "% 10d", 42);
+
+//     /* =========================================
+//        10. FLAG COMBINATIONS
+//        ========================================= */
+//     TEST("Minus and zero", "%-010d", 42);
+//     TEST("Zero and precision", "%010.5d", 42);
+//     TEST("Plus and zero", "%+010d", 42);
+//     TEST("Space and zero", "% 010d", 42);
+//     TEST("Alternate zero padding", "%#08x", 255);
+//     TEST("Alternate left align", "%-#8x", 255);
+//     TEST("Plus precision width", "%+8.5d", 42);
+//     TEST("All integer flags", "%-+#10.5x", 255);
+//     TEST("Space precision width", "% 10.5d", 42);
+
+//     /* =========================================
+//        11. MIXED CONVERSIONS
+//        ========================================= */
+//     TEST("Mixed conversions",
+//         "c=%c s=%s d=%d i=%i u=%u x=%x X=%X %%\n",
+//         'A', "42", -42, 42, 42u, 255u, 255u);
+
+//     TEST("Empty format", "");
+//     TEST("Plain text", "Hello, 42!");
+//     TEST("Several percents", "%%%%%%");
+//     TEST("Adjacent conversions", "%d%d%d", 1, 2, 3);
+
+//     return (0);
 // }

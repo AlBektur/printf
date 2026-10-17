@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:09:14 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/17 03:37:08 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 05:08:27 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,17 @@ void	ft_process_str(char *str, char **line, char *spec)
 	int		str_size;
 	t_flags	*rules;
 	t_flags	node;
+
+	if (str == NULL)
+	{
+		*line = ft_strdup("(null)");
+		return ;
+	}
+	if (ft_strlen(str) == 0)
+	{
+		*line = ft_strdup("");
+		return ;
+	}
 
 	rules = &node;
 	ft_def_rules(rules);

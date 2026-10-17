@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 01:48:22 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/15 17:07:54 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 05:22:03 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_strjoin_3(char **line, char c)
 	char	*res;
 	int		size;
 	int		i;
-	int		j;
 
 	if (*line)
 		size = ft_strlen(*line) + 1;

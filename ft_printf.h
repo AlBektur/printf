@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 02:06:01 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/17 04:40:15 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 06:26:11 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_make_id_line(char **nb, t_flags *rules, int n);
 void	ft_add_sign(char **nb, int n, t_flags *rules);
 void	ft_add_hash(char **line, int lowercase, t_flags *rules);
 
-void	ft_process_char(char c, char **line, char *spec);
+void	ft_process_char(int c, char **line, char *spec);
 void	ft_process_str(char *str, char **line, char *spec);
 void	ft_process_id(int n, char **line, char *spec);
 void	ft_process_u(unsigned int n, char **line, char *spec);

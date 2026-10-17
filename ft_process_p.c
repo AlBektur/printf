@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 00:50:54 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/17 03:51:44 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 05:26:47 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	ft_process_p_1(void *ptr, char **line, t_flags *rules)
 
 void	ft_process_p(void *ptr, char **line, char *spec)
 {
-	char				buffer[32];
-	int					res;
 	t_flags				*rules;
 	t_flags				node;
 

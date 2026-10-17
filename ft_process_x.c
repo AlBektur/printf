@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 03:21:33 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/17 04:39:05 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 05:31:11 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_add_hash_2(int *i, int *j, char *temp, char **nb)
 	temp = NULL;
 }
 
-void	ft_add_hash_1(char **nb, char *temp, char c, t_flags *rules)
+void	ft_add_hash_1(char **nb, char *temp, char c)
 {
 	int	i;
 	int	j;
@@ -92,7 +92,7 @@ void	ft_add_hash(char **nb, int capital, t_flags *rules)
 	temp = malloc(sizeof(char) * (len + 1));
 	if (!temp)
 		*nb = NULL;
-	ft_add_hash_1(nb, temp, c, rules);
+	ft_add_hash_1(nb, temp, c);
 }
 
 static void	ft_filler(char hex[], unsigned int n, char **line)
@@ -144,6 +144,6 @@ void	ft_process_x(unsigned int nb, int lowercase, char **line, char *spec)
 		ft_filler(cap_chars, nb, line);
 	ft_make_precision(line, rules->precision);
 	ft_make_id_line(line, rules, nb);
-	if (rules->hash != -1)
+	if (rules->hash != -1 && nb != 0)
 		ft_add_hash(line, lowercase, rules);
 }

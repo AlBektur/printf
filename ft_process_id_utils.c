@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/17 02:52:49 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 05:24:50 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_reverse(char *str)
 	}
 }
 
-static void	ft_fill(char *res, long n, int i, long sign)
+static void	ft_fill(char *res, long n, int i)
 {
 	if (n < 0)
 		n *= -1;
@@ -77,12 +77,12 @@ char	*ft_itoa(int n)
 	res = malloc(sizeof(int) * (counter(nb) + 1));
 	if (res == NULL)
 		return (NULL);
-	ft_fill(res, nb, i, sign);
+	ft_fill(res, nb, i);
 	ft_reverse(res);
 	return (res);
 }
 
-void	ft_make_precision_1(char **nb, char *temp, int precision, int nb_len)
+void	ft_make_precision_1(char **nb, char *temp, int nb_len)
 {
 	int	i;
 	int	j;
@@ -110,17 +110,16 @@ void	ft_make_precision(char **nb, int precision)
 {
 	char		*temp;
 	int			nb_len;
-	int			j;
 
 	if (precision > ft_strlen(*nb))
 		nb_len = precision;
 	else
 		nb_len = ft_strlen(*nb);
 	temp = malloc(sizeof(char) * (nb_len + 1));
-	ft_make_precision_1(nb, temp, precision, nb_len);
+	ft_make_precision_1(nb, temp, nb_len);
 }
 
-void	ft_add_sign_1(char **nb, char *temp, int len, char c)
+void	ft_add_sign_1(char **nb, char *temp, char c)
 {
 	int	i;
 	int	j;
@@ -165,7 +164,7 @@ void	ft_add_sign(char **nb, int n, t_flags *rules)
 	temp = malloc(sizeof(char) * (len + 1));
 	if (!temp)
 		*nb = NULL;
-	ft_add_sign_1(nb, temp, len, c);
+	ft_add_sign_1(nb, temp, c);
 }
 
 void	ft_make_id_line_3(char **nb, char *temp, t_flags *rules, char c)

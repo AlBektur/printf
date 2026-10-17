@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 21:08:04 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/16 02:54:31 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 06:25:47 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_make_c_line(t_flags *rules, char **line, char c, int len)
 	}
 }
 
-void	ft_process_char(char c, char **line, char *spec)
+void	ft_process_char(int c, char **line, char *spec)
 {
 	t_flags	*rules;
 	t_flags	node;
