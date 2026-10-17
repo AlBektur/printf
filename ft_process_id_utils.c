@@ -6,7 +6,7 @@
 /*   By: besaipid <besaipid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/07 16:13:36 by besaipid          #+#    #+#             */
-/*   Updated: 2026/10/16 06:02:51 by besaipid         ###   ########.fr       */
+/*   Updated: 2026/10/17 02:52:49 by besaipid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static void	ft_reverse(char *str)
 		str[end] = temp;
 		end--;
 		start++;
-	}		// if (rules->hash != -1)
-	 	// 	ft_add_hash(nb, 0);
+	}
 }
 
 static void	ft_fill(char *res, long n, int i, long sign)
@@ -83,28 +82,18 @@ char	*ft_itoa(int n)
 	return (res);
 }
 
-
-void	ft_make_precision(char **nb, int precision)
+void	ft_make_precision_1(char **nb, char *temp, int precision, int nb_len)
 {
-	char	*temp;
-	int		nb_len;
-	int			i;
-	int			j;
-	char		c;
-
-	if (precision > ft_strlen(*nb))
-		nb_len = precision;
-	else
-		nb_len = ft_strlen(*nb);
-	temp = malloc(sizeof(char) * (nb_len + 1));
+	int	i;
+	int	j;
 
 	i = 0;
-	while(i < (nb_len - ft_strlen(*nb)))
+	j = 0;
+	while (i < (nb_len - ft_strlen(*nb)))
 	{
 		temp[i] = '0';
 		i++;
 	}
-	j = 0;
 	while (i < nb_len)
 	{
 		temp[i] = (*nb)[j];
@@ -117,27 +106,24 @@ void	ft_make_precision(char **nb, int precision)
 	temp = NULL;
 }
 
-//working on this function
-void	ft_add_sign(char **nb, int n, t_flags *rules)
+void	ft_make_precision(char **nb, int precision)
 {
-	int		len;
-	char	c;
-	int		i;
-	char	*temp;
-	int		j;
+	char		*temp;
+	int			nb_len;
+	int			j;
 
-	if (n < 0)
-		c = '-';
+	if (precision > ft_strlen(*nb))
+		nb_len = precision;
 	else
-		c = '+';
-	if (rules->space == 1)
-		c = ' ';
+		nb_len = ft_strlen(*nb);
+	temp = malloc(sizeof(char) * (nb_len + 1));
+	ft_make_precision_1(nb, temp, precision, nb_len);
+}
 
-	len = ft_strlen(*nb) + 1;
-
-	temp = malloc(sizeof(char) * (len + 1));
-	if (!temp)
-		*nb = NULL;
+void	ft_add_sign_1(char **nb, char *temp, int len, char c)
+{
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -151,7 +137,7 @@ void	ft_add_sign(char **nb, int n, t_flags *rules)
 	j = i;
 	temp[i] = c;
 	i++;
-	while((*nb)[j])
+	while ((*nb)[j])
 	{
 		temp[i] = (*nb)[j];
 		i++;
@@ -163,70 +149,96 @@ void	ft_add_sign(char **nb, int n, t_flags *rules)
 	temp = NULL;
 }
 
+void	ft_add_sign(char **nb, int n, t_flags *rules)
+{
+	int		len;
+	char	c;
+	char	*temp;
+
+	if (n < 0)
+		c = '-';
+	else
+		c = '+';
+	if (rules->space == 1)
+		c = ' ';
+	len = ft_strlen(*nb) + 1;
+	temp = malloc(sizeof(char) * (len + 1));
+	if (!temp)
+		*nb = NULL;
+	ft_add_sign_1(nb, temp, len, c);
+}
+
+void	ft_make_id_line_3(char **nb, char *temp, t_flags *rules, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < (rules->sp_size - ft_strlen(*nb)))
+	{
+		temp[i] = c;
+		i++;
+	}
+	while (i < rules->sp_size)
+	{
+		temp[i] = (*nb)[j];
+		j++;
+		i++;
+	}
+	temp[i] = '\0';
+}
+
+void	ft_make_id_line_2(char **nb, char *temp, t_flags *rules)
+{
+	int	i;
+
+	i = 0;
+	while (i < ft_strlen(*nb))
+	{
+		temp[i] = (*nb)[i];
+		i++;
+	}
+	while (i < rules->sp_size)
+	{
+		temp[i] = ' ';
+		i++;
+	}
+	temp[i] = '\0';
+}
+
+void	ft_make_id_line_1(char **nb, t_flags *rules, char c, int n)
+{
+	char	*temp;
+
+	if (rules->sign != -1 || rules->space != -1)
+		rules->sp_size--;
+	if (rules->hash != -1)
+		rules->sp_size -= 2;
+	temp = malloc(sizeof(char) * (rules->sp_size + 1));
+	if (!temp)
+		return ;
+	if (rules->left == 1)
+		ft_make_id_line_2(nb, temp, rules);
+	else if (rules->left != 1)
+		ft_make_id_line_3(nb, temp, rules, c);
+	if (rules->sign == 1 || rules->space == 1)
+		ft_add_sign(&temp, n, rules);
+	free(*nb);
+	*nb = temp;
+	temp = NULL;
+}
+
 void	ft_make_id_line(char **nb, t_flags *rules, int n)
 {
-	int		i;
-	char	*temp;
-	char	pad;
 	char	c;
-	int		j;
-
 
 	if (rules->zero_pad == 1)
 		c = '0';
 	else
 		c = ' ';
-
-
 	if (rules->sp_size > (ft_strlen(*nb) + rules->sign))
-	{
-		i = 0;
-		j = 0;
-
-		if (rules->sign != -1 || rules->space != -1)
-			rules->sp_size--;
-		if (rules->hash != -1)
-			rules->sp_size -= 2;
-
-		// protector needs to be added
-		temp = malloc(sizeof(char) * (rules->sp_size + 1));
-
-		if(rules->left == 1)
-		{
-
-			while (i < ft_strlen(*nb))
-			{
-				temp[i] = (*nb)[i];
-				i++;
-			}
-			while (i < rules->sp_size)
-			{
-				temp[i] = ' ';
-				i++;
-			}
-			temp[i] = '\0';
-		}
-		else if (rules->left != 1)
-		{
-			while (i < (rules->sp_size - ft_strlen(*nb)))
-			{
-				temp[i] = c;
-				i++;
-			}
-			while (i < rules->sp_size)
-			{
-				temp[i] = (*nb)[j];
-				j++;
-				i++;
-			}
-			temp[i] = '\0';
-		}
-		if (rules->sign == 1 || rules->space == 1)
-			ft_add_sign(&temp, n, rules);
-		free(*nb);
-		*nb = temp;
-		temp = NULL;
-	}
+		ft_make_id_line_1(nb, rules, c, n);
 	else
 	{
 		if (rules->sign == 1 || rules->space == 1)
